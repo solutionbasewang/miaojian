@@ -1,0 +1,8 @@
+.searchcondition{
+    z-index: 30;
+    left:581px;
+    top:41px;
+    position: absolute;
+    width:350px;
+    display: none;
+}

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../style/fanyi.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="../vendor/datapick/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../style/index.css" rel="stylesheet" type="text/css">
+    <!-- bootstrap-select -->
+    <link rel="stylesheet" href="../vendor/select/select.css">
+    <link rel="stylesheet" href="../vendor/treeview/treeview.min.css">
+
+    <link rel="stylesheet" href="../style/searchcondition.css">
+    <!--bootstrap-select-->
+    <link rel="stylesheet" href="../vendor/bootstrap-select/select.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+    <style>
+
+        #pagemain>div{
+            height: 100%;
+        }
+        #left{
+            /*width: 15%;*/
+            float: left;
+            height: 100%;
+            /*float: left;*/
+            background-color: red;
+        }
+        #left_body{
+            width:100%;
+            float: left;
+            height: 100%;
+            /*background-color: #c0a16b;*/
+        }
+        #center_body_left{
+            width: 80%;
+            /*//min-width: 700px;*/
+            height: 100%;
+
+        }
+        #center{
+            width: 75%;
+            float: left;
+            /*background-color: yellow;*/
+            min-width: 800px;
+            overflow:hidden;
+            padding:0px;
+            height: 100%;
+
+        }
+        #center_body{
+            width:100%;
+            height: 100%;
+            overflow-y: auto;
+            /*background-color: #255625;*/
+        }
+        #center_body div{
+            float: left;
+            /*background-color: #2d4373;*/
+        }
+        .bar{
+            float: left;
+            width: 10px;
+            text-align: center;
+            cursor: pointer;
+            height: 40px;
+            background-color: #BABABA;
+            position:absolute;
+            z-index: 30;
+            left: 0;
+            top:0;
+        }
+        .center_bar
+        {
+            float: left;
+            width: 10px;
+            text-align: center;
+            cursor: pointer;
+            height: 40px;
+            background-color: #BABABA;
+            position:absolute;
+            z-index: 30;
+            left: 0;
+            top:0;
+        }
+
+
+    </style>
+    <script>
+
+    </script>
+</head>
+
+<body style="height:100%;font-size: 12px;">
+<div id="container" style="height:100%">
+    <div class="row" style="background-color:#036;height: 50px;">
+        <div class="col-md-2">
+            <div class="navbar-header ">
+                <a class="navbar-brand" style="color: white" href="../index.html">苗建全文搜索系统</a>
+            </div>
+        </div>
+        <div class="col-md-1" style="color:white;line-height: 50px;border-right: 1px solid #787878;text-align: center;font-size: 20px;">
+            <p class="fa fa-home"> </p>
+
+        </div>
+
+        <div class="col-md-2 col-md-offset-3" style="height:100%;padding: 10px;">
+            <form class="form-line">
+                <div class="form-group">
+                    <select id="orglist" name="usertype" class="selectpicker show-tick form-control" multiple data-live-search="false">
+
+                    </select>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-2 col-md-offset-2">
+            <ul class="nav navbar-top-links navbar-right" style="float:right;">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <!--<div>-->
+                                <!--<strong>公告1</strong>-->
+                                <!--<span class="pull-right text-muted">-->
+                                <!--<em>2018-01-01</em>-->
+                                <!--</span>-->
+                                <!--</div>-->
+                                <!--<div></div>-->
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <!--<li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </div>
+        <!-- <div class="col-md-12">
+
+        </div> -->
+    </div>
+    <div class="conditions" style="border-bottom: 1px solid #9aa8b1;">
+        <div class="tag_sffy">
+            <span id="allcount">全部()</span>
+            <span id="yfy_count">已翻译()</span>
+            <span id="wfy_count">未翻译()</span>
+            <span id="zzfy_count">正在翻译()</span>
+        </div>
+        <div class="q_tag">
+            <div style="float: left;line-height: 40px;">按标签：</div>
+            <div class="tag_css" name="tag" flag="1" style="height: 24px;" onclick="fanyi.select_tag(this)">全</div>
+            <div class="tag_css_stop" name="tag" flag="1" style="height: 24px;" onclick="fanyi.select_tag(this)">简</div>
+            <div class="tag_css_stop" name="tag" flag="0" style="height: 24px;" onclick="fanyi.select_tag(this)">日</div>
+        </div>
+        <div class="q_text" style="padding-top: 2px;">
+            <div class="form-group input-group" style="margin-bottom:0px;">
+                <input type="text" id="search_title" class="form-control" placeholder="按标题查询">
+                <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button" onclick="fanyi.load_order(1)"><i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+            </div>
+        </div>
+    </div>
+    <div  class="conditions" style="height: 30px;">
+        <div id="new_type" style="width:100%;">
+            <span id="quanbu" class="title_selected" onclick="fanyi.select_sourcetype(this,'quanbu')" ntype="0">全部(0)</span>
+            <span id="pingming" class="title_noselected" onclick="fanyi.select_sourcetype(this,'pingming')" ntype="1">平面(0)</span>
+            <span id="wangluo" class="title_noselected" onclick="fanyi.select_sourcetype(this,'wangluo')" ntype="2">网络(0)</span>
+            <span id="weixin" class="title_noselected" onclick="fanyi.select_sourcetype(this,'weixin')" ntype="128">微信(0)</span>
+            <span id="Weibo" class="title_noselected" onclick="fanyi.select_sourcetype(this,'Weibo')" ntype="256">微博(0)</span>
+            <span id="BBS" class="title_noselected" onclick="fanyi.select_sourcetype(this,'BBS')" ntype="4">论坛(0)</span>
+            <span id="TieBa" class="title_noselected" onclick="fanyi.select_sourcetype(this,'TieBa')" ntype="8">贴吧(0)</span>
+            <span id="Blog" class="title_noselected" onclick="fanyi.select_sourcetype(this,'Blog')" ntype="16">博客(0)</span>
+            <span id="wenda" class="title_noselected" onclick="fanyi.select_sourcetype(this,'wenda')" ntype="32">问答(0)</span>
+            <span id="shipin" class="title_noselected" onclick="fanyi.select_sourcetype(this,'shipin')" ntype="64">视频(0)</span>
+            <span id="guangbo" class="title_noselected" onclick="fanyi.select_sourcetype(this,'guangbo')" ntype="1024">广播(0)</span>
+            <span id="dianshi" class="title_noselected" onclick="fanyi.select_sourcetype(this,'dianshi')" ntype="512">电视(0)</span>
+            <span id="app" class="title_noselected" onclick="fanyi.select_sourcetype(this,'app')" ntype="2048">App(0)</span>
+        </div>
+    </div>
+    <div id="pagemain" style="height: 100%;">
+        <div style="width:40%" id="newslist_container">
+            <div class="newslist_title">
+                <div style="width:40%;padding:5px;">
+                    标题
+                </div>
+                <div style="width:30%;padding:5px;">
+                    时间
+                </div>
+                <div style="width:30%;padding:5px;">
+                    标签
+                </div>
+            </div>
+            <div class="newslist_body" id="orderlists" >
+
+                <!--<div class="orgteam" id="orgtearm">-->
+                    <!--<div class="orgname">cesss</div>-->
+                    <!--<div class="orgorder">-->
+                        <!--<div class="newslist_row">-->
+                            <!--<div style="width:5%;text-align: center;">-->
+                                <!--<input type="checkbox">-->
+                            <!--</div>-->
+                            <!--<div style="width:35%">-->
+                                <!--aaaaaaaaaa-->
+                            <!--</div>-->
+                            <!--<div style="width:30%">-->
+                                <!--aaaaaaaaaaaaaaaa-->
+                            <!--</div>-->
+                            <!--<div style="width:30%">-->
+                                <!--aaaaaaaaaaaa-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="orgfoot" pagenum="1">-->
+                        <!--更多-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            </div>
+        </div>
+        <div style="width:30%;" id="news_yulan">
+            <div class="yulan_one">正文预览</div>
+            <!--<div class="yulan_shuxing">-->
+                <!--<div>分拣时间：<span id="fjsj"></span></div>-->
+                <!--<div>已传分类：</div>-->
+            <!--</div>-->
+            <div class="yulan_title" id="yulan_title">
+
+            </div>
+            <div class="yulan_cc">
+                <span id="url"></span>
+                <span id="jz"></span>
+                <span id="fbsj"></span>
+            </div>
+            <div class="yulan_zhaiyao_flag">
+                摘要
+            </div>
+            <div class="yulan_zhaiyao" id="yulan_zhaiyao">
+
+            </div>
+            <div class="yulan_zhaiyao_flag">
+                正文
+            </div>
+            <div class="yulan_zhaiyao" id="yulan_context">
+
+            </div>
+        </div>
+        <div style="width:30%" id="news_fanyi">
+
+            <div id="fanyi_title">
+                <span class="title_selected" target="tab_fanyi" onclick="fanyi.select_shuxing(this)">翻译</span>
+                <span class="title_noselected" target="tab_fanyilog" onclick="fanyi.select_shuxing(this)">翻译记录</span>
+                <span class="title_noselected" target="tab_jbsxfy" onclick="fanyi.select_shuxing(this)">基本属性</span>
+                <span class="title_noselected" target="tab_qwfy" onclick="fanyi.select_shuxing(this)">全文翻译</span>
+            </div>
+            <div id="tab_fanyi">
+            <div class="shuyusousuo_text">
+                <input type="hidden" id="orderid"/>
+                <input type="hidden" id="contextid"/>
+                <div class="form-group input-group" style="margin-bottom:0px;">
+                    <input type="text" class="form-control" placeholder="">
+                    <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                                </button>
+                    </span>
+                </div>
+            </div>
+            <div class="shuyusousuo">
+            <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                术语 <span style="float: right;margin-right: 10px;color: #44A1D1">术语库</span>
+            </div>
+                <div class="shuyusousuo_result"></div>
+            </div>
+            <div class="youdaosousuo">
+                <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                    有道搜索
+                </div>
+                <div class="youdaosousuo_result">
+                    <textarea class="form-control" rows="4" id="youdaoresult"></textarea>
+                </div>
+            </div>
+            <div id="caozuo">
+                <button type="button" class="btn btn-success btn-xs" onclick="fanyi.tool_mouseget()">鼠标拾取</button> <button type="button" class="btn btn-success btn-xs" onclick="fanyi.jointitle()">加入标题</button><button type="button" class="btn btn-primary btn-xs" onclick="fanyi.joinzhaiyao()">加入摘要</button>
+            </div>
+            <div id="jointile">
+                <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                    标题
+                </div>
+                <div style="width:100%;overflow: auto;" >
+                    <textarea class="form-control" rows="5" id="engtitle"></textarea>
+                </div>
+            </div>
+            <div id="joinzhaiyao">
+                <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                    摘要
+                </div>
+                <div style="width:100%;overflow: auto;" >
+                    <textarea class="form-control" rows="5" id="engzhaiyao"></textarea>
+                </div>
+            </div>
+                <div style="width: 100%;padding: 10px;">
+                    <button type="button" class="btn btn-success btn-xs" onclick="fanyi.additem_title_zhaoyao()" id="btn_title">保存</button>
+                </div>
+        </div>
+            <div style="display: none" id="tab_jbsxfy">
+                <div id="jbsx_context">
+                    <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                        基本属性
+                    </div>
+                    <div id="jbsx_sx">
+                        <table style="width:100%;" class="table_comm">
+                            <tr>
+                                <td style="width: 20%;">媒体名称</td>
+                                <td><input id="mtmc" class="form-control" style="width: 60%;"></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">ENG</td>
+                                <td><input id="mtmc_eng" class="form-control" style="width: 60%;"></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">来源</td>
+                                <td><input id="ly" class="form-control" style="width: 60%;"></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">ENG</td>
+                                <td><input id="ly_eng" class="form-control" style="width: 60%;"></td>
+                            </tr>
+
+                            <tr>
+                                <td style="width: 20%;">版面/栏目</td>
+                                <td><input id="lm" class="form-control" style="width: 60%;"></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">ENG</td>
+                                <td><input id="lm_eng" class="form-control" style="width: 60%;"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="kzsx_context">
+                    <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                        自定义属性
+                    </div>
+                    <div id="kzsx_sx">
+                        <table class="table_comm" style="width:100%;" id="plist">
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div style="width: 100%;padding: 10px;">
+                    <button type="button" class="btn btn-success btn-xs" onclick="fanyi.additem_shuxing()" id="btn_sx">保存</button>
+                </div>
+            </div>
+            <div style="display: none;" id="tab_qwfy">
+                <div class="shuyusousuo_text">
+                    <div class="form-group input-group" style="margin-bottom:0px;">
+                        <input type="text" class="form-control" placeholder="按标题查询">
+                        <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                    </div>
+                </div>
+                <div class="shuyusousuo">
+                    <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                        术语 <span style="float: right;margin-right: 10px;color: #44A1D1">术语库</span>
+                    </div>
+                    <div class="shuyusousuo_result"></div>
+                </div>
+                <div class="youdaosousuo">
+                    <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                        有道搜索
+                    </div>
+                    <div class="youdaosousuo_result">
+                        <textarea class="form-control" rows="5" id="engcontext"></textarea>
+                    </div>
+                </div>
+                <div class="quanwen">
+                    <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                        全文
+                    </div>
+                    <div class="quanwen_result">
+                        <textarea class="form-control" rows="10" id="engcontextresult"></textarea>
+                    </div>
+                </div>
+                <div style="width: 100%;padding: 10px;">
+                    <button type="button" class="btn btn-success btn-xs" id="btn_context" onclick="fanyi.additem_context()">保存</button>
+                </div>
+            </div>
+            <div style="display: none;" id="tab_fanyilog">
+                <div class="shuyusousuo" style="max-height: 500px;overflow-y: auto;">
+                    <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                        翻译列表
+                    </div>
+                    <table style="width: 100%; margin-top: 10px;" id="itemlist">
+                        <thead>
+                        <tr>
+                            <td style="padding-left: 5px;">翻译时间</td>
+                            <td>项目名称</td>
+                            <td>用户</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr><td colspan="3" style="text-align: center;">没有翻译记录</td></tr>
+                        </tbody>
+                    </table>
+            </div>
+                <div style="width:95%;">
+                    <div style="width:95%;margin: 10px auto 0 auto; border: 1px solid #E1E5EA;">
+                        <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                            原文
+                        </div>
+                        <div style="width:100%;overflow: auto;" >
+                            <textarea class="form-control" rows="5" id="yuanwen"></textarea>
+                        </div>
+                    </div>
+                    <div style="width:95%;margin: 10px auto 0 auto; border: 1px solid #E1E5EA;">
+                        <div style="background-color: #C6CED7;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                            译文
+                        </div>
+                        <div style="width:100%;overflow: auto;" >
+                            <textarea class="form-control" rows="5" id="yiwen"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/jquery/jquery.cookies.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/select/select.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<!-- DataTables JavaScript -->
+<script src="../vendor/tablepaginator/bootstrap-paginator.min.js"></script>
+<!--datetime-->
+<script src="../vendor/datapick/bootstrap-datetimepicker.min.js"></script>
+<script src="../vendor/treeview/treeview.min.js"></script>
+<script src="../js/componse/common/loading.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+<!--markjs-->
+<script src="../vendor/markkeyword/mark.js"></script>
+<!--bootstrap-select-->
+<script src="../vendor/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="../vendor/bootstrap-select/defaults-zh_CN.js"></script>
+<script src="../js/componse/common/date.js"></script>
+<script src="../js/componse/global/message.js"></script>
+<script src="../js/componse/common/keyvalue.js"></script>
+<script src="../js/componse/common/tool.js"></script>
+<script src="../js/componse/menu/menu.js"></script>
+<script src="../js/componse/common/init.js"></script>
+<script src="../js/componse/common/formtool.js"></script>
+<script src="../js/componse/common/select.js"></script>
+<script src="../js/componse/fanyi/fanyi.js"></script>
+<script src="../js/componse/common/commsearch.js"></script>
+<script src="../js/componse/common/confirm.js"></script>
+<script src="../js/componse/common/mousedrop.js"></script>
+<script src="../js/componse/common/buju.js"></script>
+<script type="text/javascript">
+    $('#orglist').selectpicker({
+        'selectedText': 'cat'
+    });
+    window.onresize=function(){
+    }
+    var t;
+    //日期插件
+    $("#btime").datetimepicker({
+        format: 'yyyy-mm-dd', //显示格式
+        todayHighlight: 1, //今天高亮
+        minView: 2, //设置只显示到月份
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        autoclose: 1 //选择后自动关闭
+    });
+    $("#etime").datetimepicker({
+        format: 'yyyy-mm-dd', //显示格式
+        todayHighlight: 1, //今天高亮
+        minView: 2, //设置只显示到月份
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        autoclose: 1 //选择后自动关闭
+    });
+    $(document).ready(function () {
+        select_bind.orgselect("orglist",function () {
+            $('#orglist').selectpicker({
+                'selectedText': 'cat'
+            });
+            $("#orglist" ).selectpicker('refresh');
+        });
+        fanyi.load_order(1);
+        $('#orglist').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+            console.log($("#orglist").selectpicker('val'))
+        });
+        init.check.userinfo.open();
+
+    });
+    function keyup_submit(e) {
+        var evt = window.event || e;
+        if (evt.keyCode == 13) {
+            alert("a");
+        }
+    }
+
+</script>
+</body>
+
+</html>

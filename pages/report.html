@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../style/report.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="../vendor/datapick/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../style/index.css" rel="stylesheet" type="text/css">
+    <!-- bootstrap-select -->
+    <link rel="stylesheet" href="../vendor/select/select.css">
+    <link rel="stylesheet" href="../vendor/treeview/treeview.min.css">
+    <link href="../vendor/jedate/skin/jedate.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/searchcondition.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+    <style>
+        #left{
+            /*width: 15%;*/
+            float: left;
+            height: 100%;
+            width: 20%;
+            /*float: left;*/
+            background-color: red;
+        }
+        #left_body{
+            width:100%;
+            float: left;
+            height: 100%;
+            /*background-color: #c0a16b;*/
+        }
+        #center_body_left{
+            width: 80%;
+            /*//min-width: 700px;*/
+            height: 100%;
+
+        }
+        #center{
+            width: 80%;
+            float: left;
+            /*background-color: yellow;*/
+            min-width: 800px;
+            overflow:hidden;
+            padding:0px;
+            height: 100%;
+
+        }
+        #center_body{
+            width:100%;
+            height: 100%;
+            overflow-y: auto;
+            /*background-color: #255625;*/
+        }
+        #center_body div{
+            float: left;
+            /*background-color: #2d4373;*/
+        }
+        .tag_css{
+            background-color:#4c8cc7;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;
+        }
+        .tag_css_stop{
+            background-color:#b3b3b3;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;
+        }
+    </style>
+    <script>
+
+    </script>
+</head>
+
+<body style="height:100%;font-size: 12px;">
+<div id="container" style="height:100%">
+    <div class="row" style="background-color:#036;height: 45px;">
+        <div class="col-md-2">
+            <div class="navbar-header ">
+                <a class="navbar-brand" style="color: white" href="../index.html">苗建全文搜索系统</a>
+            </div>
+        </div>
+        <div class="col-md-6" style="height: 100%;line-height: 45px;">
+            <div style="float: left;color: white;width: 72px;text-align: center;"> <p class="fa fa-home"> </p></div>
+            <div style="float: left;background-color:#4F6074;color: white;width: 72px;text-align: center;">编辑</div>
+            <div style="float: left;color: white;width: 72px;text-align: center;">报告</div>
+            <div style="float: left;color: white;width: 72px;text-align: center;">客户端</div>
+        </div>
+        <div class="col-md-2" style="height:100%;padding: 10px;">
+            <form class="form-line">
+                <div class="form-group">
+                    <select class="form-control" id="orglist" onchange="report.orgchange(this)">
+                    </select>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-2">
+            <ul class="nav navbar-top-links navbar-right" style="float:right;">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <!--<div>-->
+                                <!--<strong>公告1</strong>-->
+                                <!--<span class="pull-right text-muted">-->
+                                <!--<em>2018-01-01</em>-->
+                                <!--</span>-->
+                                <!--</div>-->
+                                <!--<div></div>-->
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <!--<li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </div>
+        <!-- <div class="col-md-12">
+
+        </div> -->
+    </div>
+    <div id="pagemain" style="height: 100%;">
+        <div id="left" flag="0">
+            <div id="left_body" >
+                <div class="fenlei">
+                    <!--<select class="form-control" id="fenleiselect" onchange="report.fenleichange(this)">-->
+                        <!--<option>a</option>-->
+                    <!--</select>-->
+                    <h6>模板列表</h6>
+                    <hr style="height:1px;border:none;border-top:1px solid #c5cace;" />
+                    <div>
+                        <ul class="menulistfenlei" id="bglist">
+
+                        </ul>
+                    </div>
+                    <h6 style="margin-top: 10%;">历史报告</h6>
+                    <hr style="height:1px;border:none;border-top:1px solid #c5cace;" />
+                    <div>
+                        <ul class="menulistfenlei" id="lsbg">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="center">
+            <div id="center_title" class="center_title" style="height: 40px;">
+                <div class="title_one" >
+                    <div class="news_cz" style="margin-top: 5px;">
+                        <select style="width: 100%;height: 80%;" class="form-control" id="datetype">
+                            <option value="1">新闻时间</option>
+                            <option value="2">分拣时间</option>
+                        </select>
+                    </div>
+                    <div class="news_sj" style="width: 35%;">
+                        <div class="news_date_1">
+                            <div class="input-group" style="padding:3px;">
+                                <input size="10" type="text" value="" class="form_datetime form-control" id="btime">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                        <div style="float: left;line-height:40px;">至</div>
+                        <div class="news_date_2">
+                            <div class="input-group" style="padding:3px;">
+                                <input size="10" type="text" value="" class="form_datetime form-control" id="etime">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news_cs" style="width: 50%;">
+                        <div id="common_search" style="height: 30px;margin-top:6px;">
+                            <div id="conditions">
+                                <!-- <div>标题：宝马</div> -->
+                            </div>
+                            <div id="searcher">
+                                <input type="text" id="searchinput" placeholder="输入查询条件后回车" />
+                            </div>
+                        </div>
+                        <div id="searchcondition" class="searchcondition">
+                            <select multiple="multiple" class="form-control" style="font-size:12px;" id="conditionlist">
+                                <option value="🀄︎">标题-</option>
+                                <option value="🀀">媒体名称-</option>
+                                <option value="🀁">特征词-</option>
+                            </select>
+                        </div>
+                        <button type="button" onclick="report.getnews()" style="margin-left: 10px;margin-top:10px;" class="btn btn-outline btn-primary btn-xs">检索</button>
+                    </div>
+                </div>
+                <div class="title_three">
+                    <div class="news_cz" style="min-width: 300px;">
+                        <div style="float: left;">按标签：</div>
+                        <div class="tag_css_stop" name="tag" v="1" flag="0" style="height: 24px;" onclick="report.tag_click(this)">简</div>
+                        <div class="tag_css_stop" name="tag" v="0" flag="0" style="height: 24px;" onclick="report.tag_click(this)">日</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="center_body" id="center_body">
+                <div id="center_body_left" style="overflow-x: auto;min-width: 100%;">
+
+                    <div style="width: 100%;height: 80%;" id="simple_list">
+                        <div id="news_list_title">
+                            <div style="width:30%">标题</div>
+                            <div style="width:10%">媒体名称</div>
+                            <div style="width:15%">时间</div>
+                            <div style="width:30%">特征词</div>
+                            <div style="width:15%">标签</div>
+                        </div>
+                        <div id="table_newslist">
+
+                        </div>
+
+                    </div>
+
+                    <div style="width: 100%;">
+                        <ul class="pagination" id="page"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="modal fade" data-backdrop="static" id="report_name_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">请输入报告名称</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group">
+                        <label>报告名称</label>
+                        <input class="form-control" id="report_name">
+                        <input type="hidden" id="bgid" value="">
+                    </div>
+                    <div class="form-group">
+                        <label>报告类型</label>
+                        <select id="bgtype" class="form-control">
+                            <option value="0">简报</option>
+                            <option value="1">日报</option>
+                        </select>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
+                <button type="button" class="btn btn-primary" onclick="report.bgsave()">保存</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/jquery/jquery.cookies.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/select/select.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<!-- DataTables JavaScript -->
+<script src="../vendor/tablepaginator/bootstrap-paginator.min.js"></script>
+<!--datetime-->
+<script src="../vendor/datapick/bootstrap-datetimepicker.min.js"></script>
+<script src="../vendor/treeview/treeview.min.js"></script>
+<script src="../js/componse/common/loading.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+<!--markjs-->
+<script src="../vendor/markkeyword/mark.js"></script>
+<script src="../vendor/jedate/src/jedate.js"></script>
+<script src="../js/componse/common/date.js"></script>
+<script src="../js/componse/global/message.js"></script>
+<script src="../js/componse/common/keyvalue.js"></script>
+<script src="../js/componse/common/tool.js"></script>
+<script src="../js/componse/menu/menu.js"></script>
+<script src="../js/componse/common/init.js"></script>
+<script src="../js/componse/common/formtool.js"></script>
+<script src="../js/componse/common/select.js"></script>
+<script src="../js/componse/common/commsearch.js"></script>
+<script src="../js/componse/common/confirm.js"></script>
+<script src="../js/componse/report1/report.js"></script>
+<script type="text/javascript">
+    window.onresize=function(){
+        // changeDivHeight();
+    }
+    var t;
+//    //日期插件
+//    $("#btime").datetimepicker({
+//        format: 'yyyy-mm-dd hh:ii:ss', //显示格式
+//        todayHighlight: 1, //今天高亮
+//        minView: 0, //设置只显示到月份
+//        startView: 2,
+//        forceParse: 0,
+//        showMeridian: 1,
+//        autoclose: 1 //选择后自动关闭
+//    });
+//    $("#etime").datetimepicker({
+//        format: 'yyyy-mm-dd hh:ii:ss', //显示格式
+//        todayHighlight: 1, //今天高亮
+//        minView: 0, //设置只显示到月份
+//        startView: 2,
+//        forceParse: 0,
+//        showMeridian: 1,
+//        autoclose: 1 //选择后自动关闭
+//    });
+    jeDate("#btime",{
+        festival:false,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        method:{
+            choose:function (params) {
+
+            }
+        },
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#etime",{
+        festival:false,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        method:{
+            choose:function (params) {
+
+            }
+        },
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    $(document).ready(function () {
+        select_bind.orgselect("orglist", function () {
+            var orgid = $("#orglist").val();
+            select_bind.selectbg("bglist",orgid,undefined,"report.getmbfl");
+        });
+        t = new commsearch("conditions", null, "conditionlist", "searchinput", "conditions",
+            "searchcondition");
+        t.init(t);
+        $("#btime").val(moment().format("YYYY-MM-DD hh:mm:ss"))
+        $("#etime").val(moment().format("YYYY-MM-DD hh:mm:ss"))
+        init.check.userinfo.open();
+    });
+    function aa(obj) {
+        alert(obj);
+    }
+    function keyup_submit(e) {
+        var evt = window.event || e;
+        if (evt.keyCode == 13) {
+            alert("a");
+        }
+    }
+</script>
+</body>
+
+</html>

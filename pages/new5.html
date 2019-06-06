@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../style/news.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="../vendor/jedate/skin/jedate.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../style/index.css" rel="stylesheet" type="text/css">
+    <!-- bootstrap-select -->
+    <link rel="stylesheet" href="../vendor/select/select.css">
+    <link rel="stylesheet" href="../vendor/treeview/treeview.min.css">
+
+    <link rel="stylesheet" href="../style/searchcondition.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+    <style>
+
+        #pagemain>div{
+            height: 100%;
+        }
+        #left{
+            width: 15%;
+            float: left;
+            height: 100%;
+            /*float: left;*/
+            background-color: red;
+        }
+        #left_body{
+            width:100%;
+            float: left;
+            height: 100%;
+            /*background-color: #c0a16b;*/
+        }
+        #center_body_left{
+            width: 80%;
+            /*//min-width: 700px;*/
+            height: 100%;
+
+        }
+        #center{
+            width: 65%;
+            float: left;
+            /*background-color: yellow;*/
+            min-width: 800px;
+            overflow:hidden;
+            padding:0px;
+            height: 100%;
+            padding: 10px 10px 0px 10px;
+
+        }
+        #body_right{
+            width: 20%;
+            float: left;
+            border: 1px solid #9aa8b1;
+            overflow:hidden;
+            padding:0px;
+            height: 100%;
+        }
+        #center_body{
+            width:100%;
+            height: 100%;
+            overflow-y: auto;
+        }
+        #center_body div{
+            float: left;
+        }
+        .bar{
+            float: left;
+            width: 10px;
+            text-align: center;
+            cursor: pointer;
+            height: 40px;
+            background-color: #BABABA;
+            position:absolute;
+            z-index: 30;
+            left: 0;
+            top:0;
+        }
+        .center_bar
+        {
+            float: left;
+            width: 10px;
+            text-align: center;
+            cursor: pointer;
+            height: 40px;
+            background-color: #BABABA;
+            position:absolute;
+            z-index: 30;
+            left: 0;
+            top:0;
+        }
+        #search_area{
+            /*height: 30%;*/
+            width: 100%;
+            background-color: #FFFFFF;
+            border: 1px solid #EDECEC;
+            /*min-height: 305px;*/
+        }
+        #search_area_title{
+            height: 30px;
+            width: 100%;
+            background-color: #E3E3E4;
+            padding: 5px;
+            line-height: 20px;
+            font-weight: bolder;
+
+        }
+        #search_area_condition{
+            height: 100%;
+        }
+        #search_area_condition>div{
+            width:95%;
+            height: 35px;
+            border-bottom: 1px solid #EDECEC;
+            margin: auto;
+            line-height: 32px;
+        }
+        #search_area_condition>div>div{
+            float: left;
+        }
+        .search_area_condition_time_title{
+            width: 10%;
+            font-weight: bolder;
+
+        }
+        .search_area_condition_time_span{
+            width: 25%;
+        }
+        .search_area_condition_time_span>span{
+            margin-left: 0px;
+            /*color: #888888;*/
+        }
+        .search_area_condition_time_select{
+            width: 60%;
+        }
+        #operate_area{
+            margin-top: 10px;
+            height: 40px;
+            width: 100%;
+            background-color: #EDF0F2;
+        }
+        #operate_area>div{
+            float: left;
+            line-height: 40px;
+        }
+        .operate_area_title{
+            width: 5%;
+            padding-left: 10px;
+            font-weight: bolder;
+        }
+        .operate_area_body>div{
+            margin-left: 5px;
+        }
+        .operate_area_body_moshi{
+            padding-right: 10px;
+        }
+        .news_body_area{
+            width: 100%;
+        }
+        #news_pagination{
+            width: 100%;
+            height: 100px;
+        }
+        *{
+            /*font-family: "microsoft yahei", "PingFangSC-Regular", Arial, sans-serif;*/
+            font-size: 13px;
+        }
+        .tag_a{
+            display: block;
+            float: left;
+            margin-right: 8px;
+            /*padding: 2px;*/
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            font-size: 14px;
+            background: linear-gradient(to bottom,#f6f6f6 0,#e8e8e8 50%,#dddddd 100%);
+            border: 1px solid #b5b5b5;
+            border-radius: 2px;
+            color: #3588D4;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 5px
+        }
+        .tag_a_nodo{
+            display: block;
+            float: left;
+            margin-right: 8px;
+            /*padding: 2px;*/
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            font-size: 14px;
+            background: linear-gradient(to bottom,#f6f6f6 0,#e8e8e8 50%,#dddddd 100%);
+            border: 1px solid #b5b5b5;
+            border-radius: 2px;
+            color: #2b2b2b;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 5px
+        }
+        .tag_a_jj{
+            display: block;
+            float: left;
+            margin-right: 8px;
+            /*padding: 2px;*/
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            font-size: 14px;
+            background: linear-gradient(to bottom,#f6f6f6 0,#e8e8e8 50%,#dddddd 100%);
+            border: 1px solid #b5b5b5;
+            border-radius: 2px;
+            color: red;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 5px
+        }
+        .tag_a_fyz{
+            display: block;
+            float: left;
+            margin-right: 8px;
+            /*padding: 2px;*/
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            font-size: 14px;
+            background: linear-gradient(to bottom,#f6f6f6 0,#e8e8e8 50%,#dddddd 100%);
+            border: 1px solid #b5b5b5;
+            border-radius: 2px;
+            color:#720e9e;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 5px
+        }
+        .tag_a_ytz{
+            display: block;
+            float: left;
+            margin-right: 8px;
+            /*padding: 2px;*/
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            font-size: 14px;
+            background: linear-gradient(to bottom,#f6f6f6 0,#e8e8e8 50%,#dddddd 100%);
+            border: 1px solid #b5b5b5;
+            border-radius: 2px;
+            color: #7AB141;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 5px
+        }
+        .tag_a_ywc{
+            display: block;
+            float: left;
+            margin-right: 8px;
+            /*padding: 2px;*/
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            font-size: 14px;
+            background: linear-gradient(to bottom,#f6f6f6 0,#e8e8e8 50%,#dddddd 100%);
+            border: 1px solid #b5b5b5;
+            border-radius: 2px;
+            color: #2b2b2b;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 5px
+        }
+        #table_newslist>div:nth-of-type(odd)
+        {
+            background:#ffffff;
+        }
+    </style>
+    <script>
+
+    </script>
+</head>
+
+<body style="height:100%;font-size: 12px;">
+<div id="container" style="height:100%;overflow-x: hidden;">
+
+    <div class="row" style="background-color:#036;height: 45px;">
+        <div class="col-md-2">
+            <div class="navbar-header ">
+                <a class="navbar-brand" style="color: white" href="../index.html">苗建信息系统</a>
+            </div>
+        </div>
+        <div class="col-md-8" style="height: 100%;line-height: 45px;">
+            <div style="float: left;color: white;width: 72px;text-align: center;"> <p class="fa fa-home"> </p></div>
+            <div style="float: left;background-color:#4F6074;color: white;width: 72px;text-align: center;">编辑</div>
+            <div style="float: left;color: white;width: 72px;text-align: center;">报告</div>
+            <div style="float: left;color: white;width: 72px;text-align: center;">客户端</div>
+        </div>
+        <div class="col-md-2">
+            <ul class="nav navbar-top-links navbar-right" style="float:right;">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="pagemain" style="height: 100%;">
+        <div id="left" onmouseup='news.news_clean()' flag="0" style="height: 900px;">
+            <div id="left_body" >
+                <div class="fenlei">
+                    <div class="fenlei_orgselect">
+                        <select class="normal_select" id="orglist" onchange="news.orglistchange()">
+                        </select>
+                    </div>
+                    <div class="new_fenlei" id="fenleilist" style="height: 780px;">
+
+
+                    </div >
+                    <div class="new_fenlei_searce" style="padding: 20px;height: 80px;">
+                        <div style="width: 80%;float: left;">
+                            <input type="text" class="form-control" placeholder="输入要查询的关键字" id="sstext">
+                        </div>
+                        <div style="width: 20%;float: left;">
+                            <button class="btn btn-default" type="button" onclick="news.searchfl()"><i class="fa fa-search"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="left_bar_c" class="bar" style="height: 40px;line-height: 40px;border-radius: 0px 5px 5px 0px;" onclick="buju.showorhide('left','left')">
+            <p class="fa fa-chevron-left" id="left_bar"></p>
+        </div >
+        <div id="center" onmouseup='news.news_clean()' style="height: 900px;">
+            <div id="search_area">
+                <div id="search_area_title">
+                    新闻筛选
+                </div>
+                <div id="search_area_condition">
+                    <div>
+                        <div class="search_area_condition_time_title">时间范围</div>
+                        <div class="search_area_condition_time_span" id="new_date">
+                            <span id="d1" onclick="news.news_dateselect('d1')" class="new_type_select">今天</span>
+                            <span id="d2" onclick="news.news_dateselect('d2')" class="new_type_select_no">23小时</span>
+                            <span id="d3" onclick="news.news_dateselect('d3')" class="new_type_select_no">3天</span>
+                            <span id="d4" onclick="news.news_dateselect('d4')" class="new_type_select_no">7天</span>
+                            <span id="d5" onclick="news.news_dateselect('d5')" class="new_type_select_no">10天</span>
+                        </div>
+
+                        <div class="search_area_condition_time_select" style="padding-top: 5px">
+                            <div class="news_date_1" style="width: 180px;">
+                                <div class="input-group">
+                                    <input size="10" type="text" value="" class="form_datetime form-control" id="btime" style="font-size: 12px;height: 24px;">
+                                    <span class="input-group-addon" style="padding: 0px"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                            </div>
+                            <div style="float: left;padding: 0px;">至</div>
+                            <div class="news_date_2" style="width: 180px;">
+                                <div class="input-group">
+                                    <input size="10" type="text" value="" style="font-size: 12px;height: 24px;" class="form_datetime form-control" id="etime">
+                                    <span class="input-group-addon" style="padding: 0px"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="search_area_condition_time_title">新闻</div>
+                        <div class="search_area_condition_time_span" id="news_fj" style="width: 35%">
+                            <span id="news_count" class="new_type_select" onclick="news.new_isfenjianselect(this)" value="-1">全部(0)</span>
+                            <span id="news_yfj" class="new_type_select_no" onclick="news.new_isfenjianselect(this)" value="1" >已分拣(0)</span>
+                            <span id="news_wfj" class="new_type_select_no" onclick="news.new_isfenjianselect(this)" value="0">未分拣(0)</span>
+                        </div>
+                        <div class="search_area_condition_time_title">相似新闻</div>
+                        <div class="search_area_condition_time_span" id="news_xsd">
+                            <span id="xsd_bhb" class="new_type_select_no" onclick="news.news_xsdselect('xsd_bhb')" value="0">不合并</span>
+                            <span id="xsd_xshd" class="new_type_select" onclick="news.news_xsdselect('xsd_xshd')" value="1">相似合并</span>
+                            <span id="xsd_jzhb" class="new_type_select_no" onclick="news.news_xsdselect('xsd_jzhb')" value="2">精准合并</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="search_area_condition_time_title">新闻调性</div>
+                        <div class="search_area_condition_time_span" id="news_xwdx">
+                            <span id="xwdx_qb" class="new_type_select" onclick="news.news_xwdxselect('xwdx_qb')" value="-2">全部</span>
+                            <span id="xwdx_mg" class="new_type_select_no" onclick="news.news_xwdxselect('xwdx_mg')" value="-1">敏感</span>
+                            <span id="xwdx_fmg" class="new_type_select_no" onclick="news.news_xwdxselect('xwdx_fmg')" value="1">非敏感</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="search_area_condition_time_title">媒体类型</div>
+                        <div class="search_area_condition_time_span" style="width: 90%;" id="new_type">
+                            <span id="quanbu" onclick="news.news_typeselect('quanbu')" class="new_type_select" ntype="0">全部(0)</span>
+                            <span id="pingming" onclick="news.news_typeselect('pingming')" class="new_type_select_no" ntype="1">平面(0)</span>
+                            <span id="wangluo" onclick="news.news_typeselect('wangluo')" class="new_type_select_no" ntype="2">网络(0)</span>
+                            <span id="weixin" onclick="news.news_typeselect('weixin')" class="new_type_select_no" ntype="128">微信(0)</span>
+                            <span id="Weibo" onclick="news.news_typeselect('Weibo')" class="new_type_select_no" ntype="256">微博(0)</span>
+                            <span id="BBS" onclick="news.news_typeselect('BBS')" class="new_type_select_no" ntype="4">论坛(0)</span>
+                            <span id="TieBa" onclick="news.news_typeselect('TieBa')" class="new_type_select_no" ntype="8">贴吧(0)</span>
+                            <span id="Blog" onclick="news.news_typeselect('Blog')" class="new_type_select_no" ntype="16">博客(0)</span>
+                            <span id="wenda" onclick="news.news_typeselect('wenda')" class="new_type_select_no" ntype="32">问答(0)</span>
+                            <span id="shipin" onclick="news.news_typeselect('shipin')" class="new_type_select_no" ntype="64">视频(0)</span>
+                            <span id="guangbo" onclick="news.news_typeselect('guangbo')" class="new_type_select_no" ntype="1024">广播(0)</span>
+                            <span id="dianshi" onclick="news.news_typeselect('dianshi')" class="new_type_select_no" ntype="512">电视(0)</span>
+                            <span id="app" onclick="news.news_typeselect('app')" class="new_type_select_no" ntype="2048">App(0)</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="search_area_condition_time_title">条件搜索</div>
+                        <div class="search_area_condition_time_span" style="width: 70%;">
+                            <div class="news_cs" style="width: 100%;margin-top: 2px;">
+                                <div id="common_search" style="height: 30px;">
+                                    <div id="conditions">
+                                        <!-- <div>标题：宝马</div> -->
+                                    </div>
+                                    <div id="searcher" style="width: 100%;">
+                                        <input type="text" id="searchinput" placeholder="输入查询条件后回车" onkeydown="news.keyup_submit(event)" />
+                                    </div>
+                                </div>
+                                <div id="searchcondition" class="searchcondition">
+                                    <select multiple="multiple" class="form-control" style="font-size:12px;" id="conditionlist">
+                                        <option value="🀄︎">标题-</option>
+                                        <option value="🀀">媒体名称-</option>
+                                        <option value="🀁">特征词-</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="search_area_condition_time_span" style="width: 5%;line-height: 35px;">
+                            <button type="button" style="margin-left: 10px;" class="btn btn-outline btn-primary btn-xs" onclick="news.loadnews(1)">检索</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="operate_area">
+                <div class="operate_area_title">操作</div>
+                <div class="operate_area_body" style="padding: 5px;">
+                    <a class="tag_a_nodo" onclick="news.hebing()"><i class="fa fa-object-group" aria-hidden="true" title="批量合并"></i></a>
+                    <a class="tag_a_nodo" onclick="news.chaijie()"><i class="fa fa fa-object-ungroup" aria-hidden="true" title="批量拆分"></i></a>
+                    <a class="tag_a_nodo" onclick="news.joinjianbao_all()"><i class="fa fa-file-text-o" aria-hidden="true" title="加入简报"></i></a>
+                    <a class="tag_a_nodo" onclick="news.joinribao_all()"><i class="fa fa-sun-o" aria-hidden="true" title="加入日报"></i></a>
+                    <a class="tag_a_nodo" onclick="news.fuzhi_show()"><i class="fa fa-files-o" aria-hidden="true" title="批量复制"></i></a>
+                    <a class="tag_a_nodo" onclick="news.joinfanyibatch()"><i class="fa fa-globe" aria-hidden="true" title="批量翻译"></i></a>
+                    <a class="tag_a_nodo" onclick="news.dele_all()"><i class="fa fa-trash" aria-hidden="true" title="批量删除"></i></a>
+                    <a class="tag_a_nodo" onclick="news.comm_exit_baogao(1)" style="color: #888888"><i class="fa fa-file-text-o" aria-hidden="true" title="退出简报"></i></a>
+                    <a class="tag_a_nodo" onclick="news.comm_exit_baogao(2)" style="color: #888888"><i class="fa fa-sun-o" aria-hidden="true" title="退出日报"></i></a>
+                    <!--<div onclick="news.joinjianbao_all()" style="background-color:#4c8cc7;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;">简</div>-->
+                    <!--<div onclick="news.joinribao_all()" style="background-color:#4c8cc7;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;">日</div>-->
+                    <!--<div onclick="news.hebing()" style="background-color:#4c8cc7;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;">合</div>-->
+                    <!--<div onclick="news.fuzhi_show()" style="background-color:#4c8cc7;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;">复</div>-->
+                    <!--<div onclick="news.chaijie()" style="background-color:#4c8cc7;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;">拆</div>-->
+                    <!--<div style="background-color:#ffb36e;border-radius:12px;line-height: 24px;height:24px;width:24px;color:white;text-align: center;float: left;cursor: pointer;margin-top: 8px;" onclick="news.dele_all()">-->
+                        <!--<p class="fa fa-trash-o"></p>-->
+                    <!--</div>-->
+                </div>
+                <div class="operate_area_body_moshi" style="float: right">
+                    <span id="simple_model" active="1" onclick="news.readingmodeTransformation('simple_model')" class="glyphicon glyphicon-th" style="color:#4c8cc7"></span>
+                    <span id="xiangxi_model" active="0" onclick="news.readingmodeTransformation('xiangxi_model')" class="glyphicon glyphicon-th-large" style="margin-left:10px;"
+                          onclick="news.liulanmoshi()"></span>
+                    <span class="glyphicon glyphicon-menu-hamburger" style="margin-left:10px;" onclick="news.new_opencolsmodal()"></span>
+
+                </div>
+            </div>
+            <div id="news_body_area" style="height: 550px;">
+                <div style="width: 100%;overflow-y: auto;height: 550px;" id="simple_list">
+                    <div id="news_list_title">
+                        <div style="width:3%"><input type="checkbox" id="simple_c" onclick="news.check_all(1,this)"></div>
+                        <div name="cols" vv="col_title" style="width:22%;" key="title">&nbsp;&nbsp;标题<p class="fa fa-sort" style="cursor: pointer;" name="sort" state="0" onclick="news.pxselect(this,'Title')" key="Title" sort="Asc"></p></div>
+                        <div style="width:15%" name="cols" vv="col_medianame">媒体名称<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'MediaName')" state="0" key="MediaName" sort="Asc"></p></div>
+                        <div style="width:15%" name="cols" vv="col_createtime">时间<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'CreateTime')" state="0" key="CreateTime" sort="Asc"></p></div>
+                        <div style="width:10%" name="cols" vv="col_keywords">特征词</div>
+                        <div style="width:10%;display: none;" name="cols" vv="col_author">记者</div>
+                        <div style="width:5%;display: none;" name="cols" vv="col_relativity">调性</div>
+
+                        <div style="width:8%" name="colss" vv="col_xsd">相似度<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'similarytity')" state="0" key="similarytity" sort="Asc"></p></div>
+                        <div style="width:20%">标签</div>
+                    </div>
+                    <div id="table_newslist">
+                    </div>
+
+                </div>
+                <div style="width: 100%;display: none;overflow: auto;height: 100%;" id="xiangxi_list">
+                    <div id="xiangxi_list_title" style="width:100%;">
+                        <div style="width:5%;display: inline;"><input id="xiangxi_c" type="checkbox" onclick="news.check_all(2,this)"></div>
+                        <div style="width:95%;display: inline;">全选</div>
+                    </div>
+                    <div id="xiangxi_list_table">
+
+                    </div>
+
+                </div>
+            </div>
+            <div id="news_pagination">
+                <ul class="pagination" id="page"></ul>
+                <input type="hidden" id="pagenum"/>
+            </div>
+        </div>
+        <div class="center_bar" id="right_bar_c"  style="height: 40px; line-height: 40px;border-radius: 5px 0px 0px 5px;"  onclick="buju.showorhide('body_right','right')">
+            <p class="fa fa-chevron-right" id="right_bar"></p>
+        </div>
+        <div id="body_right" flag="0"   onmouseup='news.news_clean()' style="background-color: #D7DCE2;height: 900px;">
+            <div id="news_yulan">
+                <div class="yulan_top">
+                    <div class="yulan_top_title" style="float:left;width:30%;">正文预览</div>
+                    <div class="yulan_top_operate" style="float: right;width: 70%;text-align: right;">
+                        <span>正文</span><span>图文原版</span><span>图</span>
+                    </div>
+                    <div class="yulan_zhaiyao">
+                        <div id="yulan_zhaiyao_fjsj" class="yulan_zhaiyao_fjsj">分拣时间：<span id="yl_yjsj" style="color: #d9d9d9">2018-01-01 00：30：30</span></div>
+                        <div id="yulan_zhaiyao_ycfl" class="yulan_zhaiyao_fjsj">已传分类：<span id="yl_ycfl" style="color: #d9d9d9">日常中国</span></div>
+                        <div id="yulan_zhaiyao_title" class="yulan_zhaiyao_title">
+                            <h3 id="yl_title"></h3>
+                        </div>
+                        <div id="yulan_zhaiyao_zhaiyao" class="yulan_zhaiyao_zhaiyao">
+                            <div style="font-size: 15px;font-weight: bolder;">摘要</div>
+                            <div id="yl_zhaiyao"></div>
+
+                        </div>
+                        <div id="yulan_zhaiyao_context" class="yulan_zhaiyao_context">
+                            <div id="yl_context"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="news_proptery" id="news_proptery">
+                <div style="width: 100%;">
+                    <div onclick="news.tab_select_p(this,'p_tab')" class="p_select" name="p_t" style="background-color: #BEC5CD;width: 30%;margin: 0px;padding-left: 5px;height: 40px; float: left">简报信息</div>
+                    <div onclick="news.tab_select_p(this,'p_fanyi')" name="p_t" style="background-color: #BEC5CD;width: 30%;margin: 0px;padding-left: 5px;height: 40px; float: left">翻译记录</div>
+                    <!--<div style="background-color: #BEC5CD;width: 50%;margin: 0px;padding-right: 5px;height: 40px;float: left;text-align: right;" >-->
+                        <!--<div style="display: none;cursor: pointer" onclick="news.yulanshowandhide(this)" showflag="0" id="showflag">预览显示</div></div>-->
+                    <div style="background-color: #BEC5CD;width: 40%;margin: 0px; float: right;text-align: right;padding-right: 5px;"  >
+                        <button type="button" class="btn btn-default btn-sm" onclick="news.p_edit(this)" flag="0" id="editflag"><p class="fa fa-edit" style="margin-bottom:0px;"></p>进入编辑</button>
+                    </div>
+
+                </div>
+                <!--<p class="fa fa-edit" style="font-weight:bolder;cursor: pointer;" onclick="news.p_edit(this)" flag="0" id="editflag">进入编辑</p>-->
+                <div id="p_tab">
+                <table class="ptable" style="width:100%;background-color: #D7DCE2">
+                    <tr>
+                        <td colspan="2" style="padding: 5px;font-weight: bolder">
+                            基本信息
+                        </td>
+                    </tr>
+                    <tr style="">
+                        <td style="width: 20%;padding: 5px;">媒体名称</td>
+                        <td style="width:65%;padding: 5px;"><input type="hidden" id="contextid" value="0"><input type="hidden" id="orderid" value="0"> <input class="form-control" style="width: 176px;height: 30px;" id="meitimingcheng"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%; padding: 5px;">来源</td>
+                        <td style="width:65%;padding: 5px;"><input class="form-control" style="width: 176px;height: 30px;"  id="laiyuan"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%; padding: 5px;">标题</td>
+                        <td style="width:65%;padding: 5px;"><input class="form-control" style="width: 176px;height: 30px;"   id="biaoti"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%; padding: 5px;">版面/栏目</td>
+                        <td style="width:65%;padding: 5px;"><input class="form-control" style="width: 176px;height: 30px;"   id="lanmu"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%; padding: 5px;">字数</td>
+                        <td style="width:65%;padding: 5px;"><input class="form-control"  style="width: 176px;height: 30px;"  id="zishu"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%; padding: 5px;">新闻时间</td>
+                        <td style="width:65%;padding: 5px;"><input class="form-control"  style="width: 176px;height: 30px;"  id="xinwenshijian"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%; padding: 5px;">记者</td>
+                        <td style="width:65%;padding: 5px;"><input class="form-control"  style="width: 176px;height: 30px;"  id="jizhe"></td>
+                    </tr>
+                </table>
+                <div class="form-inline" style="padding: 5px;"><label style="font-weight: bolder">自定义属性</label>
+                    <p class="fa fa-plus" id="flag_add" style="cursor: pointer;display: none;" data-target="#pweihu" data-toggle="modal" ></p>
+                </div>
+                <table class="ptable"style="background-color: #D7DCE2;width:100%;" id="plist">
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="form-inline" style="padding:10px;text-align:center;display: none;" id="zdy_operate">
+                    <button type="button" class="btn btn-primary" onclick="news.p_save()" style="margin-right:10px;">保存</button>
+                </div>
+                </div>
+                <div id="fanyi_tab" style="display: none;">
+                    <div class="shuyusousuo" style="max-height: 500px;">
+                        <table style="width: 100%; margin-top: 10px;" id="itemlist">
+                            <thead>
+                            <tr>
+                                <td style="padding-left: 5px;">翻译时间</td>
+                                <td>项目名称</td>
+                                <td>用户</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr><td colspan="3" style="text-align: center;">没有翻译记录</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="width:100%;">
+                        <div style="width:100%;margin: 10px auto 0 auto; border: 1px solid #E1E5EA;">
+                            <div style="background-color: #f3f3f3;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                                原文
+                            </div>
+                            <div style="width:100%;overflow: auto;" >
+                                <textarea class="form-control" rows="5" id="yuanwen"></textarea>
+                            </div>
+                        </div>
+                        <div style="width:100%;margin: 10px auto 0 auto; border: 1px solid #E1E5EA;">
+                            <div style="background-color: #f3f3f3;width:100%;height: 30px;line-height: 30px;padding-left: 5px;">
+                                译文
+                            </div>
+                            <div style="width:100%;overflow: auto;" >
+                                <textarea class="form-control" rows="5" id="yiwen"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- model -->
+<div class="modal fade" data-backdrop="static" id="yulanmodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:800px;height:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span>新闻预览</span>
+                </h4>
+            </div>
+            <div class="modal-body" >
+                <iframe id="yulanurl" style="width:100%;height: 800px;"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<div class="modal fade" data-backdrop="static" id="pweihu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">添加自定义属性</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label>属性名称</label>
+                        <input class="form-control" id="p_name">
+                    </div>
+                    <div class="form-group">
+                        <label>属性类型</label>
+                        <select class="form-control" id="p_type" onchange="news.ptypechange()" >
+                            <option value="0">文本</option>
+                            <option value="1">日期</option>
+                            <option value="2">下拉框</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="display: none;" id="div_sourcetype">
+                        <label>属性数据源</label>
+                        <select class="form-control" id="p_source">
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
+                <button type="button" class="btn btn-primary" onclick="news.addp()">保存</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" data-backdrop="static" id="news_fuzhi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">请选择目标机构以及分类</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <table style="width:50%;">
+                        <tr style="padding: 5px;">
+                            <td style="width:20%;">机构</td>
+                            <td style="padding:0px 20px 0px 20px;"><select  id="fuzhi_jglist" class="form-control" onchange="news.fuzhi_jg_change()"></select></td>
+                        </tr>
+                        <tr>
+                            <td style="height: 20px"></td>
+                        </tr>
+                        <tr style="padding: 5px;">
+                            <td>分类</td>
+                            <td style="padding: 20px;"><select  id="fuzhi_fenlist" class="form-control"></select></td>
+                        </tr>
+                        <tr style="padding: 5px;">
+                            <td style="height: 20px;">操作类型</td>
+                            <td style="padding: 20px;"><select  id="o_type" class="form-control">
+                                <option value="1">复制</option>
+                                <option value="2">移动</option>
+                            </select></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
+                <button type="button" class="btn btn-primary" onclick="news.fuzhi()">保存</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" data-backdrop="static" id="news_cols" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">请选择显示的列</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <table class="table table-striped table-bordered table-hover" id="new_cols">
+                        <thead>
+                        <tr>
+                            <th>选择</th>
+                            <th>列名</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="news.new_showcol()">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" data-backdrop="static" id="comm_dele_panl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">请选择</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <table style="width:100%;">
+                        <tr style="padding: 5px;border-bottom: #9aa8b1 dotted 1px;">
+                            <td style="width:20%;padding: 5px;"><input name="operate_type" type="radio" value="1" /></td>
+                            <td>批量删除</td>
+                        </tr>
+                        <tr style="padding: 5px;border-bottom: #9aa8b1 dotted 1px;">
+                            <td style="width:20%;padding: 5px;"><input name="operate_type" type="radio" value="2" /></td>
+                            <td>批量删除简报</td>
+                        </tr>
+                        <tr style="padding: 5px;border-bottom: #9aa8b1 dotted 1px;">
+                            <td style="width:20%;padding: 5px;"><input name="operate_type" type="radio" value="3" /></td>
+                            <td>批量删除日报</td>
+                        </tr>
+
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
+                <button type="button" class="btn btn-primary" onclick="news.comm_dele()">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div id="mousedropvalue" style="display: none">
+    <span id="downorup"></span>
+</div>
+<input type="hidden" id="mousepanl" value=""/>
+<input type="hidden" id="zhankaidivid" value="">
+
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/jquery/jquery.cookies.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/select/select.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<!-- DataTables JavaScript -->
+<script src="../vendor/tablepaginator/bootstrap-paginator.min.js"></script>
+<!--datetime-->
+<script src="../vendor/jedate/src/jedate.js"></script>
+<script src="../vendor/treeview/treeview.min.js"></script>
+<script src="../js/componse/common/loading.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+<!--markjs-->
+<script src="../vendor/markkeyword/mark.js"></script>
+<script src="../js/componse/common/date.js"></script>
+<script src="../js/componse/global/message.js"></script>
+<script src="../js/componse/common/keyvalue.js"></script>
+<script src="../js/componse/common/tool.js"></script>
+<script src="../js/componse/menu/menu.js"></script>
+<script src="../js/componse/common/init.js"></script>
+<script src="../js/componse/common/formtool.js"></script>
+<script src="../js/componse/common/select.js"></script>
+<script src="../js/componse/news/news.js"></script>
+<script src="../js/componse/common/commsearch.js"></script>
+<script src="../js/componse/common/confirm.js"></script>
+<script src="../js/componse/common/mousedrop.js"></script>
+<script src="../js/componse/common/buju2.js"></script>
+<script type="text/javascript">
+    window.onresize=function(){
+        // changeDivHeight();
+        buju.init("bar","center_bar");
+    }
+    var t;
+    // //日期插件
+    // $("#btime").datetimepicker({
+    //     format: 'yyyy-mm-dd hh:ii:ss', //显示格式
+    //     todayHighlight: 1, //今天高亮
+    //     minView: 0, //设置只显示到月份
+    //     startView: 2,
+    //     forceParse: 0,
+    //     showMeridian: 1,
+    //     autoclose: 1 //选择后自动关闭
+    // });
+    // $("#etime").datetimepicker({
+    //     format: 'yyyy-mm-dd hh:ii:ss', //显示格式
+    //     todayHighlight: 1, //今天高亮
+    //     minView: 0, //设置只显示到月份
+    //     startView: 2,
+    //     forceParse: 0,
+    //     showMeridian: 1,
+    //     autoclose: 1 //选择后自动关闭
+    // });
+    jeDate("#btime",{
+        festival:false,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        method:{
+            choose:function (params) {
+
+            }
+        },
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#etime",{
+        festival:false,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        method:{
+            choose:function (params) {
+
+            }
+        },
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    buju.init("bar","center_bar");
+    $(document).ready(function () {
+        $("#btime").val(moment().add(-24,"hour").format("YYYY-MM-DD HH:00:00"))
+        $("#etime").val(moment().format("YYYY-MM-DD HH:00:00"))
+        news.cleandata();
+        select_bind.orgselect("orglist", function () {
+            $("#orglist").val(init.get.userinfo().data.userinfo.orgid);
+            var orgid = $("#orglist").val();
+            select_bind.fenleiselect_new(orgid, "fenleilist",function () {
+
+                news.getcolinfo();
+                news.new_showcol();
+                news.loadnews(1);
+
+            });
+        });
+        select_bind.selectsource("p_source");
+        select_bind.selecthours("bhour");
+        select_bind.selecthours("ehour");
+        select_bind.selectmin("bmin");
+        select_bind.selectmin("emin");
+        select_bind.selecthours("bhour_all");
+        select_bind.selecthours("ehour_all");
+        select_bind.selectmin("bmin_all");
+        select_bind.selectmin("emin_all");
+        select_bind.orgselect("fuzhi_jglist",function () {
+            select_bind.selectfenlei("fuzhi_fenlist",$("#fuzhi_jglist").val(),"0");
+        },"0")
+        t = new commsearch("conditions", null, "conditionlist", "searchinput", "conditions",
+            "searchcondition");
+        t.init(t);
+        var mousedrop1 = new mousefrop();
+        mousedrop1.move_tar("container");
+        mousedrop1.move_down("table_newslist");
+
+        init.check.userinfo.open();
+        // buju.screeninit();
+    });
+    function keyup_submit(e) {
+        var evt = window.event || e;
+        if (evt.keyCode == 13) {
+            alert("a");
+        }
+    }
+</script>
+</body>
+
+</html>

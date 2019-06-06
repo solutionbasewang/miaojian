@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../style/index.css" rel="stylesheet" type="text/css">
+    <!-- bootstrap-select -->
+    <link rel="stylesheet" href="../vendor/select/select.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="indexheader navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
+        <div class="navbar-header ">
+            <a class="navbar-brand" style="color: white" href="../index.html">苗建信息检索平台</a>
+        </div>
+        <!-- /.navbar-header -->
+        <!-- /.navbar-header -->
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-messages">
+                    <li>
+                        <a href="#">
+                            <!--<div>-->
+                            <!--<strong>公告1</strong>-->
+                            <!--<span class="pull-right text-muted">-->
+                            <!--<em>2018-01-01</em>-->
+                            <!--</span>-->
+                            <!--</div>-->
+                            <!--<div>系统维护公告</div>-->
+                        </a>
+                    </li>
+
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <!--<li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>-->
+                    <!--</li>-->
+                    <!--<li class="divider"></li>-->
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1 class="page-header">报告模板维护</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.search -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        搜索条件
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <form class="form-line">
+                                    <div class="form-group">
+                                        <label>模板名称</label>
+                                        <input class="form-control" id="s_name">
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="col-lg-3">
+                                <form class="form-line">
+                                    <div class="form-group">
+                                        <label>状态</label>
+                                        <select class="form-control" id="s_status">
+                                            <option value="-1">全部</option>
+                                            <option value="0">启用</option>
+                                            <option value="1">停用</option>
+                                        </select>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="col-lg-3">
+                                <form class="form-line">
+                                    <div class="form-group">
+                                        <label>所属机构</label>
+                                        <select class="form-control" id="jglist">
+                                        </select>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <form class="form-line">
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-primary" onclick="template.load(1)">search</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.search end-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-1">
+                                查询结果
+                            </div>
+                            <div class="col-md-1 col-md-offset-10">
+                                <button type="button" class="btn btn-outline btn-primary" onclick="template.addshow()">新增</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="table_apilist">
+                            <thead>
+                            <tr>
+                                <th>报告模板名称</th>
+                                <th>状态</th>
+                                <th>文件类型</th>
+                                <th>报告类型</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <ul class="pagination" id="page"></ul>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="orgsave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">模板维护</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#apiinfo" data-toggle="tab">基本信息</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="apiinfo">
+                        <form role="form" style="padding:10px;">
+                            <input class="form-control" id="p_Id" style="display:none;">
+                            <div class="form-group">
+                                <label>报告标题</label>
+                                <input class="form-control" id="p_Title">
+                            </div>
+                            <div class="form-group">
+                                <label>文件类型</label>
+                                <!--<input class="form-control" id="p_Category">-->
+                                <select id="p_Category" class="form-control">
+                                    <option value="0">Word</option>
+                                    <option value="1">Excel</option>
+                                    <option value="2">Html</option>
+                                    <option value="3">Pdf</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>报告类型</label>
+                                <!--<input class="form-control" id="p_Type">-->
+                                <select id="p_Type" class="form-control">
+                                    <option value="0">日报</option>
+                                    <option value="1">简报</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>所属机构</label>
+                                <!--<input class="form-control" id="p_Organization">-->
+                                <select id="p_Organization" class="form-control">
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>路径</label>
+                                <input class="form-control" id="p_Path">
+                            </div>
+                            <div class="form-group">
+                                <label>状态</label>
+                                <label class="radio-inline">
+                                    <input type="radio" checked name="optionsRadiosInline" id="optionsRadiosInline1" value="0">启用
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="1">停用
+                                </label>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="template.save()">保存</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="addbgfl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">模板分类</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#orginfo" data-toggle="tab">基本信息</a>
+                    </li>
+                    <li><a href="#jgfl" data-toggle="tab">机构分类</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="orginfo">
+                        <form role="form" style="padding:10px;">
+                            <form role="form">
+                                <div class="form-group">
+                                    <input class="form-control" id="p_mbid" style="display:none;" >
+                                    <label>分类名称</label>
+                                    <input class="form-control" id="p_fname">
+                                </div>
+                                <div class="form-group">
+                                    <label>上级分类</label>
+                                    <select class="form-control" id="p_parentId" name="select" formtype="t">
+                                    </select>
+                                </div>
+                            </form>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="jgfl">
+                        <form role="form" style="padding:30px;">
+
+                            <div class="form-inline" style="width: 100%;">
+                                <select class="form-control" style="width: 50%;" id="orgfllist"></select>
+                                <span class="btn btn-primary" onclick="template.addjgfl()">填 加</span>
+                            </div>
+                            <div style="width:100%;padding-top:10px;">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="table_jzdslist">
+                                    <thead>
+                                    <tr>
+                                        <th>分类名称</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--<tr><td>test</td><td>[删除]</td></tr>-->
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="template.savefj()">保存</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="bgfllist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">模板分类</h4>
+            </div>
+            <div class="modal-body">
+                <!--<ul class="nav nav-pills">-->
+                    <!--<li><a class="active" href="#mblist" data-toggle="tab">模板分类</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <div class="tab-content">
+                    <form role="form" style="padding:30px;">
+                        <div style="width:100%;padding-top:10px;">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="table_mbfllist">
+                                <thead>
+                                <tr>
+                                    <th>模板分类名称</th>
+                                    <th>系统分类名称</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!--<tr><td>test</td><td>[删除]</td></tr>-->
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/jquery/jquery.cookies.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/select/select.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<!-- DataTables JavaScript -->
+<script src="../vendor//tablepaginator/bootstrap-paginator.min.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+<script src="../js/componse/global/message.js"></script>
+<script src="../js/componse/common/keyvalue.js"></script>
+<script src="../js/componse/common/tool.js"></script>
+<script src="../js/componse/menu/menu.js"></script>
+<script src="../js/componse/common/init.js"></script>
+<script src="../js/componse/common/formtool.js"></script>
+<script src="../js/componse/common/select.js"></script>
+<script src="../js/componse/reporttemplate/template.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // menus.loadMenu("side-menu", tool.getUrlParam("index"));
+        // $('.selectpicker').selectpicker();
+        // api.search();
+        select_bind.orgselect("p_Organization",function () {
+            template.load(1);
+        },"");
+        select_bind.orgselect("jglist",undefined,"");
+        menus.loadMenu("side-menu", tool.getUrlParam("index"));
+        init.check.userinfo.open();
+    });
+</script>
+</body>
+
+</html>

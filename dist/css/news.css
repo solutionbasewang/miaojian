@@ -1,0 +1,86 @@
+.fenlei{
+    background-color: #EAEBED;
+    height: 100%;
+    border:1px solid #dde2e6;
+    padding: 10px;
+}
+.menutile{
+    margin-top:15px;
+    font-weight: bold;
+}
+.menulist{
+    margin: 2rem auto;
+    text-align: left;
+    display: inline-block;
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    width:100%;
+}
+.menulistfenlei
+{
+    margin: 2rem auto;
+    text-align: left;
+    display: inline-block;
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    width:100%;
+}
+.menulistfenlei li{
+    margin-top: 10px;
+    width: 100%;
+}
+.menulist li{
+    margin-top: 5px;
+    width: 100%;
+}
+.newstype{
+
+}
+.newstype>span{
+    margin-left:10px;
+}
+.datetype{
+    text-align: center;
+    
+}
+.datetype>span{
+    margin-right:15px;
+}
+.datetype>span:first-child{
+    font-weight: bold;
+}
+.readmodel p span{
+    margin-left:10px;
+}
+.tag_action div{
+    margin-left: 5px;
+}
+.pie {
+    float: left;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #8e8e8e;
+    background-image: linear-gradient(to right, transparent 50%, #ffffff 0),linear-gradient(to top, transparent 10%, #8e8e8e 0);
+}
+.pie::before {
+    content: '';
+    display: block;
+    margin-left: 50%;
+    height: 100%;
+    border-radius: 0 100% 100% 0/50%;
+    background-color: inherit;
+    transform-origin: left;
+    transform: rotate(.2turn);
+}
+.operate_type div{
+    margin-left: 10px;
+}
+.fenjian_news{
+
+}
+.do_fenjian_news{
+    background-color: #F4F5F3;
+}

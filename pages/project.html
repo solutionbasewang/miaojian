@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../vendor/datapick/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../style/index.css" rel="stylesheet" type="text/css">
+    <!-- bootstrap-select -->
+    <link rel="stylesheet" href="../vendor/select/select.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--report-->
+    <link href="../style/project.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="indexheader navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
+        <div class="navbar-header ">
+            <a class="navbar-brand" style="color: white" href="../index.html">苗建信息检索平台</a>
+        </div>
+        <!-- /.navbar-header -->
+        <!-- /.navbar-header -->
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-messages">
+                    <li>
+                        <a href="#">
+                            <!--<div>-->
+                                <!--<strong>公告1</strong>-->
+                                <!--<span class="pull-right text-muted">-->
+                            <!--<em>2018-01-01</em>-->
+                        <!--</span>-->
+                            <!--</div>-->
+                            <!--<div>系统维护公告</div>-->
+                        </a>
+                    </li>
+
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <!--<li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>-->
+                    <!--</li>-->
+                    <!--<li class="divider"></li>-->
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1 class="page-header">项目维护</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <button type="button" class="btn btn-primary" style="margin-left: 3px;" onclick="report.add()">在线填写</button>
+            </div>
+            <div class="col-md-2 col-lg-offset-9">
+                <select class="form-control" id="jglist" onchange="report.jgchange()">
+                </select>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="reports">
+
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" data-backdrop="static" id="orgsave"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 700px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">项目维护</h4>
+            </div>
+            <div class="modal-body" >
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#cgxq" data-toggle="tab">常规需求</a>
+                    </li>
+                    <li><a href="#fyxq" data-toggle="tab">翻译需求</a>
+                    </li>
+                    <li><a href="#khts" data-toggle="tab">客户投诉/反馈</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="cgxq">
+                        <div class="overflow_div">
+                        <form role="form" style="padding:10px;">
+                            <table class="xqtable">
+                                <tr>
+                                    <td width="20%" rowspan="4"><input type="hidden" id="jbid" value="0"><input type="hidden" id="normalid" value="0">项目基本信息</td>
+                                    <td width="20%">客户名称及简称<span class="btflag">*</span></td>
+                                    <td colspan="3"><input type="text" id="Name" /></td>
+                                </tr>
+                                <tr>
+                                    <td>项目类型<span class="btflag">*</span></td>
+                                    <td colspan="3"><select id="Type"><option value="0">直接客户</option></select></td>
+                                </tr>
+                                <tr>
+                                    <td>项目服务时间<span class="btflag">*</span></td>
+                                    <td colspan="3">
+                                        <input name="text" type="text" class="form_datetime" id="btime" readonly="readonly" />
+                                        至
+                                        <input name="text2" type="text" class="form_datetime" id="etime" readonly="readonly" /></td>
+                                </tr>
+                                <tr>
+                                    <td>是否试用<span class="btflag">*</span></td>
+                                    <td colspan="3">
+                                        <select id="sfsy">
+                                            <option value="true">是</option>
+                                            <option value="false">否</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="17">项目检测/制作要求</td>
+                                    <td rowspan="2">监测要求</td>
+                                    <td width="6%">自身</td>
+                                    <td width="79%"><input type="text" id="SelfContext" />*用逗号分隔</td>
+                                </tr>
+                                <tr>
+                                    <td width="10%">竞品</td>
+                                    <td><input type="text" id="CompetitorsContext" />*用逗号分隔</td>
+                                </tr>
+                                <!--<tr>-->
+                                    <!--<td width="10%">行业</td>-->
+                                    <!--<td><input type="text" id="aaaa" />*用逗号分隔</td>-->
+                                <!--</tr>-->
+                                <tr>
+                                    <td>监测范围<span class="btflag">*</span></td>
+                                    <td colspan="3"><input type="checkbox" value="0" id="wz" name="jcfw" />未知
+                                        <input type="checkbox" value="1" id="pm" name="jcfw" />平面
+                                        <input type="checkbox" value="2" id="wl" name="jcfw" />网络
+                                        <input type="checkbox" value="4" name="jcfw" />论坛
+                                        <input type="checkbox" value="8" name="jcfw" />贴吧
+                                        <input type="checkbox" value="16" name="jcfw" />博客
+                                        <input type="checkbox" value="32" name="jcfw" />问答
+                                        <input type="checkbox" value="64" name="jcfw" />视频
+                                        <input type="checkbox" value="128" name="jcfw" />微信
+                                        <input type="checkbox" value="256" name="jcfw" />微博
+                                        <input type="checkbox" value="512" name="jcfw" />电视
+                                        <input type="checkbox" value="1024" name="jcfw" />广播
+                                        <input type="checkbox" value="2048" name="jcfw" />App
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>电视监测信息<span class="btflag">*</span></td>
+                                    <td><select name="select8" id="TVMonitorInfomation">
+                                        <option value="true">是</option>
+                                        <option value="false">否</option>
+                                    </select></td>
+                                </tr>
+                                <tr>
+                                    <td>翻译信息<span class="btflag">*</span></td>
+                                    <td><select name="select7" id="TranslateInfomation">
+                                        <option value="true">是</option>
+                                        <option value="false">否</option>
+                                    </select></td>
+
+                                </tr>
+                                <tr>
+                                    <td>检测频率</td>
+                                    <td colspan="2"><select name="select6" id="Frequency">
+                                        <option value="0">一天一次</option>
+                                    </select></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="6">报告形式及发送时间</td>
+                                    <td>简报要素</td>
+                                    <td><input name="text42" type="text" id="jianbao" t="0" /></td>
+                                </tr>
+                                <tr>
+                                    <td>日报</td>
+                                    <td><input name="text42" type="text" id="ribao" t="0" /></td>
+                                </tr>
+                                <tr>
+                                    <td>周报</td>
+                                    <td><input name="text43" type="text" id="zhoubao" t="2" /></td>
+                                </tr>
+                                <tr>
+                                    <td>月报</td>
+                                    <td><input name="text44" type="text" id="yuebao" t="3" /></td>
+                                </tr>
+                                <tr>
+                                    <td>季报</td>
+                                    <td><input name="text45" type="text" id="jibao" t="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>年报</td>
+                                    <td><input name="text46" type="text" id="nianbao" t="5" /></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="5">特殊要求</td>
+                                    <td>是否留原报<span class="btflag">*</span></td>
+                                    <td><select name="select9" id="IsOriginalReport">
+                                        <option value="true">是</option>
+                                        <option value="false">否</option>
+                                    </select></td>
+                                </tr>
+                                <tr>
+                                    <td>是否打印<span class="btflag">*</span></td>
+                                    <td><select name="select" id="IsPrint">
+                                        <option value="true">是</option>
+                                        <option value="false">否</option>
+                                    </select>  </td>
+                                </tr>
+                                <tr>
+                                    <td>扫描标准等</td>
+                                    <td><input name="text4" type="text" id="ScanRemark" /></td>
+                                </tr>
+                                <tr>
+                                    <td>网络</td>
+                                    <td><input name="text5" type="text" id="InternetRemark" /></td>
+                                </tr>
+                                <tr>
+                                    <td>系统平台要求</td>
+                                    <td><input name="text6" type="text" id="SystemPlatformRemark" /></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4">内部负责人信息</td>
+                                    <td>销售负责人<span class="btflag">*</span></td>
+                                    <td><select name="select2" id="SalesManager">
+                                        <option>张三</option>
+                                    </select>  </td>
+                                    <td><label id="SalesName"></label></td>
+                                </tr>
+                                <tr>
+                                    <td>监测负责人<span class="btflag">*</span></td>
+                                    <td><select name="select3" id="MonitorManager">
+                                        <option>张三</option>
+                                    </select></td>
+                                    <td><label id="MonitorName"></label></td>
+                                </tr>
+                                <tr>
+                                    <td>客户服务负责人<span class="btflag">*</span></td>
+                                    <td><select name="select4" id="CustomServiceManager">
+                                        <option>张三</option>
+                                    </select></td>
+                                    <td><label id="CustomServiceName"></label></td>
+                                </tr>
+                                <tr>
+                                    <td>翻译负责人<span class="btflag">*</span></td>
+                                    <td><select name="select5" id="TranslateManager">
+                                        <option>张三</option>
+                                    </select></td>
+                                    <td><label id="TranslateName"></label></td>
+                                </tr>
+                                <tr>
+                                    <td>备注</td>
+                                    <td colspan="3"><textarea id="beizhu"></textarea></td>
+                                </tr>
+                            </table>
+                        </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="fyxq">
+                        <div class="overflow_div">
+                        <form role="form" style="padding:10px;">
+                        <table class="xqtable" style="height: 100%;">
+
+                            <tr>
+                                <td rowspan="1" width="100px;">翻译人员<p class="fa fa-plus-circle" onclick="report.fyry_add()"></p></td>
+                                <td colspan="6" style="padding: 0px;"><table id="fyrylist" class="fyrylist"></table></td>
+                            </tr>
+                            <tr>
+                                <td>报告<p class="fa fa-plus-circle" onclick="report.bg_add()"></p></td>
+                                <td colspan="3">
+                                    <table class="xqtable" style="height: 100%;" id="bgl">
+                                        <tbody>
+
+                                        </tbody>
+                                        <!--<tr>-->
+                                            <!--<td style="width:300px;"><input type='text' value='123' style="display: none;" /><select>-->
+                                                <!--<option value='0'>rb</option>-->
+                                                <!--<option value='2'>zb</option>-->
+                                                <!--<option value='3'>yb</option>-->
+                                                <!--<option value='4'>jb</option>-->
+                                                <!--<option value='5'>jb</option>-->
+                                            <!--</select></td>-->
+                                            <!--<td style="width:400px;">-->
+                                                <!--<table class="xqtable" style="height: 100%;" id="aaa">-->
+                                                <!--</table>-->
+
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>事项<p class="fa fa-plus-circle" onclick="report.sx_show()"></p></td>
+                                <td colspan="3">
+                                    <div id="sxlist">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>参考资料<p class="fa fa-plus-circle" onclick="report.ckzl_add()"></p></td>
+                                <td colspan="3">
+                                    <div id="ckzllist">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="khts">
+                        <div class="overflow_div">
+                        <form role="form" style="padding:10px;">
+                            <button type="button" style="margin-bottom: 5px;" class="btn btn-primary btn-xs" style="margin-left: 3px;" onclick="report.ts_add()">添加投诉</button>
+
+                            <br/>
+                            <div id="ketslist">
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="report.all_save()">保存</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+    <div class="modal fade" id="pweihu" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">添加自定义属性</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>事项标题</label>
+                            <input class="form-control" id="sxtitle">
+                        </div>
+                        <div class="form-group">
+                            <label>事项内容</label>
+                            <input class="form-control" id="sxcontext">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="report.sx_close()" >关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="report.sx_build()">保存</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/jquery/jquery.cookies.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/select/select.js"></script>
+<!--datetime-->
+<script src="../vendor/datapick/bootstrap-datetimepicker.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<!-- DataTables JavaScript -->
+<script src="../vendor//tablepaginator/bootstrap-paginator.min.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="../js/componse/common/date.js"></script>
+<script src="../dist/js/sb-admin-2.js"></script>
+<script src="../js/componse/global/message.js"></script>
+<script src="../js/componse/common/keyvalue.js"></script>
+<script src="../js/componse/common/tool.js"></script>
+<script src="../js/componse/menu/menu.js"></script>
+<script src="../js/componse/common/init.js"></script>
+<script src="../js/componse/common/formtool.js"></script>
+<script src="../js/componse/common/select.js"></script>
+<script src="../js/componse/common/loading.js"></script>
+<script src="../js/componse/report/project.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //日期插件
+        $(".form_datetime").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii', //显示格式
+            todayHighlight: 1, //今天高亮
+            minView: 0, //设置只显示到月份
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1,
+            autoclose: 1 //选择后自动关闭
+        });
+        menus.loadMenu("side-menu", tool.getUrlParam("index"));
+        init.check.userinfo.open();
+        select_bind.orgselect("jglist",report.select,"0");
+        select_bind.selectuser("SalesManager","0");
+        select_bind.selectuser("MonitorManager","0");
+        select_bind.selectuser("CustomServiceManager","0");
+        select_bind.selectuser("TranslateManager","0");
+        $("#SalesManager").change(function () {
+            report.rychange($("#SalesManager").val(),"SalesName");
+
+        });
+        $("#MonitorManager").change(function () {
+            report.rychange($("#MonitorManager").val(),"MonitorName");
+
+        });
+        $("#CustomServiceManager").change(function () {
+            report.rychange($("#CustomServiceManager").val(),"CustomServiceName");
+
+        });
+        $("#TranslateManager").change(function () {
+            report.rychange($("#TranslateManager").val(),"TranslateName");
+
+        });
+        // report.select();
+    });
+</script>
+</body>
+
+</html>

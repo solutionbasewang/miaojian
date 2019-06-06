@@ -1,0 +1,235 @@
+.conditions{
+    height: 40px;
+
+    width:100%;
+}
+.conditions>div{
+    float: left;
+}
+.q_tag{
+    width: 20%;
+    padding-left: 10px;
+}
+.q_tag>div{
+    margin-left: 4px;
+}
+#pagemain>div{
+    float: left;
+
+}
+#newslist_container{
+    width:40%;
+    height: 80%;
+}
+#news_yulan{
+    width:30%;
+    height: 100%;
+    border: 1px #c9c9c9 solid;
+    overflow: auto;
+}
+#news_fanyi{
+    width:30%;
+    height: 100%;
+}
+.tag_css{
+    background-color:#4c8cc7;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;
+}
+.tag_css_stop{
+    background-color:#b3b3b3;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;
+}
+.q_text{
+    width: 30%;
+}
+#new_type{
+    padding-left: 14px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #c9c9c9;
+}
+.newslist_title{
+    width:100%;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px #c9c9c9 solid;
+}
+.newslist_title>div{
+    float: left;
+}
+.newslist_body{
+    width: 100%;
+}
+.newslist_row{
+    float: left;
+    width: 100%;
+    border-bottom: 1px #c9c9c9 dotted;
+}
+.newslist_row>div{
+    float: left;
+}
+.newslist_row_select{
+    float: left;
+    width: 100%;
+    border-bottom: 1px #c9c9c9 dotted;
+    background-color: #787878;
+    color: white;
+}
+.newslist_row_select>div{
+    float: left;
+}
+.yulan_one{
+    line-height: 30px;
+    height: 30px;
+    width: 95%;
+    margin: auto;
+    border-bottom: 1px #c9c9c9 solid ;
+}
+.yulan_shuxing{
+    margin:10px auto 0 auto;
+    width: 95%;
+    background-color: #f2f2f2;
+    padding: 2px;
+    color: #b6b6b6;
+}
+.yulan_title{
+    margin:10px auto 0 auto;
+    width: 95%;
+    font-size: 18px;
+    font-weight: bolder;
+}
+.yulan_cc{
+    width: 95%;
+    margin:10px auto 0 auto;
+}
+.yulan_zhaiyao_flag{
+    width: 95%;
+    margin:10px auto 0 auto;
+}
+.yulan_zhaiyao{
+    width: 95%;
+    margin:10px auto 0 auto;
+}
+#fanyi_title{
+    line-height: 30px;
+    height: 30px;
+    width: 100%;
+    margin: auto;
+    border-bottom: 1px #c9c9c9 solid ;
+}
+#fanyi_title>span{
+    margin-left: 20px;
+}
+.shuyusousuo_text{
+    width:100%;
+    padding: 10px;
+}
+.shuyusousuo{
+    width:95%;
+    margin: auto;
+    border: 1px solid #E1E5EA;
+}
+.shuyusousuo_result{
+    width: 100%;
+    height: 100px;
+
+}
+.youdaosousuo{
+    width:95%;
+    margin: 10px auto 0 auto;
+    border: 1px solid #E1E5EA;
+}
+.youdaosousuo_result{
+    width: 100%;
+
+}
+#caozuo{
+    padding: 5px;
+    height: 30px
+}
+#caozuo>button{
+    float: right;
+    margin-right: 5px;
+}
+#jointile{
+    width:95%;
+    margin: 10px auto 0 auto;
+    border: 1px solid #E1E5EA;
+}
+#joinzhaiyao{
+    width:95%;
+    margin: 10px auto 0 auto;
+    border: 1px solid #E1E5EA;
+}
+#jbsx_context{
+    width:95%;
+    margin: 10px auto 0 auto;
+    border: 1px solid #E1E5EA;
+}
+#jbsx_sx{
+    width: 100%;
+    height: 300px;
+    overflow: auto;
+}
+#kzsx_context{
+    width:95%;
+    margin: 10px auto 0 auto;
+    border: 1px solid #E1E5EA;
+}
+#kzsx_sx{
+    width: 100%;
+    height: 300px;
+    overflow: auto;
+}
+.table_comm td{
+    padding: 5px;
+}
+.quanwen{
+    width:95%;
+    margin: 10px auto 0 auto;
+    border: 1px solid #E1E5EA;
+}
+.quanwen_result{
+    width: 100%;
+}
+.title_selected{
+    font-size: larger;
+    font-weight: bolder;
+    cursor: pointer;
+}
+.title_noselected{
+    font-size: unset;
+    font-weight: normal;
+    cursor: pointer;
+}
+.tag_sffy{
+    width: 30%;
+    line-height: 40px;
+    padding-left: 14px;
+}
+.tag_sffy>span{
+    margin-left: 10px;
+}
+.orgteam{
+    width:100%;
+    margin-top: 10px;
+}
+.orgname{
+    width:100%;
+    padding-left: 2%;
+    font-weight: bolder;
+    font-size: larger;
+}
+.orgorder{
+    width:100%;
+}
+.orgfoot{
+    width: 100%;
+    text-align: center;
+    border-bottom:1px solid #c9c9c9;
+}
+.operate_active{
+    cursor: pointer;
+    color: #0d6aad;
+}
+
+#itemlist tr:nth-child(odd){background:#F4F4F4;}
+#itemlist tr:hover{background-color: #1ab7ea}

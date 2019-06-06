@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../style/news.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="../vendor/datapick/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../style/index.css" rel="stylesheet" type="text/css">
+    <!-- bootstrap-select -->
+    <link rel="stylesheet" href="../vendor/select/select.css">
+    <link rel="stylesheet" href="../vendor/treeview/treeview.min.css">
+
+    <link rel="stylesheet" href="../style/searchcondition.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+    <style>
+
+        #pagemain>div{
+            height: 100%;
+        }
+        #left{
+            width: 15%;
+            float: left;
+            height: 100%;
+            /*float: left;*/
+            background-color: red;
+        }
+        #left_body{
+            width:100%;
+            float: left;
+            height: 100%;
+
+        }
+        #center{
+            width: 75%;
+            float: left;
+            /*background-color: yellow;*/
+            min-width: 800px;
+            overflow:auto;
+            padding:0px;
+            height: 100%;
+        }
+        #center_title{
+            width: 100%;
+            height: 40px;
+            background-color:#ffffff;
+        }
+        #center_body{
+            width:100%;
+        }
+        #center_body div{
+            float: left;
+        }
+        .bar{
+            float: left;
+            width: 10px;
+            text-align: center;
+            cursor: pointer;
+            height: 40px;
+            background-color: #BABABA;
+        }
+        .center_bar
+        {
+            float: left;
+            width: 10px;
+            text-align: center;
+            cursor: pointer;
+            height: 40px;
+            background-color: #BABABA;
+        }
+
+
+    </style>
+    <script>
+
+    </script>
+</head>
+
+<body style="height:100%;font-size: 12px;overflow-x: hidden;">
+<div id="container" style="height:100%">
+    <div class="row" style="background-color:#036;height: 50px;">
+        <div class="col-md-2">
+            <div class="navbar-header ">
+                <a class="navbar-brand" style="color: white" href="../index.html">苗建全文搜索系统</a>
+            </div>
+        </div>
+        <div class="col-md-1" style="color:white;line-height: 50px;border-right: 1px solid #787878;text-align: center;font-size: 20px;">
+            <p class="fa fa-home"> </p>
+
+        </div>
+        <div class="col-md-1" style="background-color:#596b7f;height:100%;">
+            <div style="height:100%;color: white;line-height: 50px;text-align: center">编辑页面</div>
+        </div>
+        <div class="col-md-1" style="height:100%;">
+            <div style="height:100%;color: white;line-height: 50px;text-align: center;cursor: pointer;">报告导出</div>
+        </div>
+        <div class="col-md-3">
+            <div id="baogaodate">
+                <span>报告提交时间：</span> <span>2018年10月21日 18：30  <p class="fa fa-edit"></p></span>
+
+            </div>
+        </div>
+        <div class="col-md-2" style="height:100%;padding: 10px;">
+            <form class="form-line">
+                <div class="form-group">
+                    <select class="form-control" id="orglist" onchange="news.orglistchange()">
+                    </select>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-2">
+            <ul class="nav navbar-top-links navbar-right" style="float:right;">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>公告1</strong>
+                                    <span class="pull-right text-muted">
+                                            <em>2018-01-01</em>
+                                        </span>
+                                </div>
+                                <div>系统维护公告</div>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </div>
+        <!-- <div class="col-md-12">
+
+        </div> -->
+    </div>
+<div id="pagemain" style="height: 100%;">
+    <div id="left" flag="0">
+        <div id="left_body" >
+            <div class="fenlei">
+                <input type="text" class="form-control" placeholder="Search..." id="sstext">
+
+                <hr style="height:1px;border:none;border-top:1px solid #c5cace;" />
+                <div>
+                    <ul class="menulistfenlei" id="fenleilist">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bar" style="height: 40px;line-height: 40px;border-radius: 0px 5px 5px 0px;" onclick="buju.showorhide('left','left')">
+        <p class="fa fa-chevron-left" id="left_bar"></p>
+    </div >
+    <div id="center">
+        <div id="center_title" class="center_title" style="height: 40px;">
+            <div class="news_fj">
+                <span id="news_count">全部50(条)</span> <span id="news_yfj">已分拣50(条)</span> <span id="news_wfj">未分拣50(条)</span>
+            </div>
+            <div class="news_xsd">
+                <select id="news_xsd_select" style="border-radius:0px;">
+                    <option value="1">精准合并</option>
+                    <option value="2">相似合并</option>
+                    <option value="3">不合并</option>
+                </select>
+            </div>
+            <div class="news_cz">
+                <div style="float: left;">操作：</div>
+                <div onclick="news.joinjianbao_all()" style="background-color:#4c8cc7;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;">简</div>
+                <div onclick="news.joinribao_all()" style="background-color:#4c8cc7;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;">日</div>
+                <div onclick="news.hebing()" style="background-color:#4c8cc7;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 8px;">合</div>
+                <!--<div onclick="news.newfj()" style="background-color:#4c8cc7;border-radius:12px;height:24px;width:24px;text-align: center;line-height: 24px;color:white;float: left;cursor: pointer;margin-top: 12px;">分</div>-->
+                <div style="background-color:#ffb36e;border-radius:12px;line-height: 24px;height:24px;width:24px;color:white;text-align: center;float: left;cursor: pointer;margin-top: 8px;" onclick="news.dele_all()">
+                    <p class="fa fa-trash-o"></p>
+                </div>
+            </div>
+            <div class="news_cs">
+                <div id="common_search" style="height: 30px;margin-top:6px;">
+                    <div id="conditions">
+                        <!-- <div>标题：宝马</div> -->
+                    </div>
+                    <div id="searcher">
+                        <input type="text" id="searchinput" placeholder="输入查询条件后回车" onkeydown="news.keyup_submit(event)" />
+                    </div>
+                </div>
+                <div id="searchcondition" class="searchcondition">
+                    <select multiple="multiple" class="form-control" style="font-size:12px;" id="conditionlist">
+                        <option value="🀄︎">标题-</option>
+                        <option value="🀀">媒体名称-</option>
+                        <option value="🀁">特征词-</option>
+                    </select>
+                </div>
+                <button type="button" style="margin-left: 10px;margin-top:10px;" class="btn btn-outline btn-primary btn-xs" onclick="news.loadnews(1)">检索</button>
+            </div>
+
+        </div>
+        <div class="center_body" id="center_body">
+            <div id="center_body_left" style="width:80%;">
+                <div style="width:100%;height: 40px;">
+                    <div class="news_twotitle">
+                        <div class="new_type" id="new_type">
+                            <!--<span>全部(1300)</span>-->
+                            <span id="News" onclick="news.news_typeselect('News')" ntype="0"></span>
+                            <span id="BBS" onclick="news.news_typeselect('BBS')" ntype="1"></span>
+                            <span id="TieBa" onclick="news.news_typeselect('TieBa')" ntype="2"></span>
+                            <span id="Blog" onclick="news.news_typeselect('Blog')" ntype="3"></span>
+                            <span id="Weibo" onclick="news.news_typeselect('Weibo')" ntype="3"></span>
+                        </div>
+
+                        <div class="new_date" id="new_date">
+                            <span id="date_jt" onclick="news.news_dateselect('date_jt')" >今天</span>
+                            <span id="date_24" onclick="news.news_dateselect('date_24')">24H</span>
+                            <span id="date_3d" onclick="news.news_dateselect('date_3d')">三天</span>
+                            <!--<span id="date_7d" onclick="news.news_dateselect('date_7d')">七天</span>-->
+                            <span id="date_1m" onclick="news.news_dateselect('date_1m')" class="new_type_select">一月</span>
+                        </div>
+
+
+                        <div class="new_datetime">
+                            <div class="input-group" style="padding:3px;">
+                                <input size="10" type="text" value="" class="form_datetime form-control" id="sddate">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                        <div class="new_model">
+                            <span id="simple_model" active="1" onclick="news.readingmodeTransformation('simple_model')" class="glyphicon glyphicon-th" style="color:#4c8cc7"></span>
+                            <span id="xiangxi_model" active="0" onclick="news.readingmodeTransformation('xiangxi_model')" class="glyphicon glyphicon-th-large" style="margin-left:10px;"
+                                  onclick="news.liulanmoshi()"></span>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <div style="width: 100%" id="simple_list">
+                        <div id="news_list_title">
+                            <div style="width:30%"><input type="checkbox" id="simple_c" onclick="news.check_all(1,this)">&nbsp;&nbsp;标题</div>
+                            <div style="width:10%">媒体名称</div>
+                            <div style="width:15%">时间</div>
+                            <div style="width:15%">特征词</div>
+                            <div style="width:10%">相似度</div>
+                            <div style="width:15%">标签</div>
+                            <div style="width:5%">操作</div>
+                        </div>
+                        <table class="table" id="table_newslist">
+                            <tbody>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div style="width: 100%;display: none;" id="xiangxi_list">
+                        <div id="xiangxi_list_title" style="width:100%;">
+                            <div style="width:5%;display: inline;"><input id="xiangxi_c" type="checkbox" onclick="news.check_all(2,this)"></div>
+                            <div style="width:95%;display: inline;">全选</div>
+                        </div>
+                        <div id="xiangxi_list_table">
+                        </div>
+                    </div>
+                    <!--<div class="row" id="simple_list">-->
+                        <!--<div class="col-md-12">-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-md-12">-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="row pre-scrollable" style="max-height:830px;height: 830px;">-->
+                                <!--<div class="col-md-12">-->
+
+
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="row" id="xiangxi_list" style="display: none">-->
+                        <!--<div class="col-md-12">-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-md-12">-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="row pre-scrollable" style="max-height:830px;">-->
+                                <!--<div class="col-md-12">-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+
+                </div>
+            </div>
+            <div class="center_bar"  style="height: 40px; line-height: 40px;border-radius: 5px 0px 0px 5px;"  onclick="buju.showorhide('center_body_right','right')">
+                <p class="fa fa-chevron-right" id="right_bar"></p>
+            </div>
+            <div id="center_body_right"  flag="0"  style="width:10%;">
+                <div class="news_proptery">
+                    <p class="fa fa-edit" style="font-weight:bolder;">进入编辑</p>
+                    <ul class="menulist">
+                        <li>
+                            <div class="form-inline">
+                                <input class="form-control"  id="contextid" style="display: none">
+                                <label style="font-size:10px;width:25%">媒体名称</label>
+                                <div class="input-group">
+                                    <input class="form-control" disabled  id="meitimingcheng"> </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-inline">
+                                <label style="font-size:10px;width:25%">来源</label>
+                                <div class="input-group">
+                                    <input class="form-control" disabled id="laiyuan"> </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-inline">
+                                <label style="font-size:10px;width:25%">标题</label>
+                                <div class="input-group">
+                                    <input class="form-control"  id="biaoti"> </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-inline">
+                                <label style="font-size:10px;width:25%">版面/栏目</label>
+                                <div class="input-group">
+                                    <input class="form-control"  id="lanmu"> </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-inline">
+                                <label style="font-size:10px;width:25%">字数</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="zishu"> </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-inline">
+                                <label style="font-size:10px;width:25%">新闻时间</label>
+                                <div class="input-group">
+                                    <input class="form-control"  id="xinwenshijian"> </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-inline">
+                                <label style="font-size:10px;width:25%">记者</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="jizhe"> </div>
+
+                            </div>
+                        </li>
+
+                    </ul>
+                    <hr style="height:1px;border:none;border-top:1px solid #c0c0c0;color:#5B8E5B" />
+
+                    <div class="form-inline"><label>自定义属性</label>
+                        <p class="fa fa-plus" id="flag_add" style="cursor: pointer;display: none;" data-target="#pweihu" data-toggle="modal" ></p>
+                    </div>
+                    <ul class="menulist" id="plist">
+
+                    </ul>
+                    <div class="form-inline" style="padding:10px;text-align:center;display: none;" id="zdy_operate">
+                        <button type="button" class="btn btn-primary" onclick="news.p_save()" style="margin-right:10px;">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+</div>
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/jquery/jquery.cookies.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/select/select.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<!-- DataTables JavaScript -->
+<script src="../vendor//tablepaginator/bootstrap-paginator.min.js"></script>
+<!--datetime-->
+<script src="../vendor/datapick/bootstrap-datetimepicker.min.js"></script>
+<script src="../vendor/treeview/treeview.min.js"></script>
+<script src="../js/componse/common/loading.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+<script src="../js/componse/common/date.js"></script>
+<script src="../js/componse/global/message.js"></script>
+<script src="../js/componse/common/keyvalue.js"></script>
+<script src="../js/componse/common/tool.js"></script>
+<script src="../js/componse/menu/menu.js"></script>
+<script src="../js/componse/common/init.js"></script>
+<script src="../js/componse/common/formtool.js"></script>
+<script src="../js/componse/common/select.js"></script>
+<script src="../js/componse/news/news.js"></script>
+<script src="../js/componse/common/commsearch.js"></script>
+<script src="../js/componse/common/confirm.js"></script>
+<script src="../js/componse/common/mousedrop.js"></script>
+<script src="../js/componse/common/buju.js"></script>
+<script type="text/javascript">
+    var t;
+    //日期插件
+    $(".form_datetime").datetimepicker({
+        format: 'yyyy-mm-dd', //显示格式
+        todayHighlight: 1, //今天高亮
+        minView: "month", //设置只显示到月份
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        autoclose: 1 //选择后自动关闭
+    });
+    $(document).ready(function () {
+        buju.init("bar","center_bar");
+        select_bind.orgselect("orglist", function () {
+            var orgid = $("#orglist").val();
+            select_bind.fenleiselect(orgid, "fenleilist");
+            //news.loadnews(1);
+        });
+        select_bind.selectsource("p_source")
+        t = new commsearch("conditions", null, "conditionlist", "searchinput", "conditions",
+            "searchcondition");
+        t.init(t);
+        var mousedrop = new mousefrop("table_newslist","fenleilist");
+        mousedrop.init();
+        var h = document.body.clientHeight;
+        console.log(h);
+
+    });
+    function keyup_submit(e) {
+        var evt = window.event || e;
+        if (evt.keyCode == 13) {
+            alert("a");
+        }
+    }
+</script>
+</body>
+
+</html>

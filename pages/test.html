@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/componse/common/loading.js"></script>
+    <style>
+        .searchbody {
+            width: 300px;
+            background-color: red;
+            height: 30px;
+            z-index: 11;
+            /* float: left; */
+        }
+
+        .searchinput {
+            width: 100px;
+            height: 30px;
+            /* float:right; */
+        }
+
+        div.top {
+            margin: 50px;
+            padding: 20px;
+            width: 200px;
+            height: 200px;
+            border: 2px dashed #ebbcbe;
+        }
+
+        div.top div {
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            color: white;
+        }
+
+        div.a {
+            background: red;
+        }
+
+        div.b {
+            background: green;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            z-index: 999;
+        }
+    </style>
+     <script type="text/javascript">
+        $(function () {
+            $("#btn_submit").on("click", function () {
+                $.bootstrapLoading.start({ loadingTips: "正在处理数据，请稍候..." });
+                $.ajax({
+                    type: 'get',
+                    url: 'http://54.223.186.188:8082/api/login/zice1/11111111',
+                    data: {},
+                    success: function (data, statu) {
+                        debugger;
+                    },
+                    complete: function () {
+                        $.bootstrapLoading.end();
+                    }
+                });
+            })
+            
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        <!-- <div class="top">
+            <div class="b">我是绝对定位，并且重叠在上方</div>
+            <div class="a">我是默认定位</div>
+        </div>
+        <div style="position:absolute;">
+                <div style="position:absolute;left:0;top:0; width:300px;background-color:none;">aa</div>
+                <input type="text"style="position:absolute;left:0;top:0;width:300px;">
+                
+        </div> -->
+        <button type="button" id="btn_submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>加载测试</button>
+                        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../style/news.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="../vendor/datapick/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../style/index.css" rel="stylesheet" type="text/css">
+    <!-- bootstrap-select -->
+    <link rel="stylesheet" href="../vendor/select/select.css">
+    <link rel="stylesheet" href="../vendor/treeview/treeview.min.css">
+
+    <link rel="stylesheet" href="../style/searchcondition.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+    <style>
+
+        #pagemain div{
+            height: 100%;
+        }
+        #left{
+            float: left;
+        }
+        #left div{
+        }
+        #left_body{
+            width:200px;
+            float: left;
+        }
+        .bar{
+            float: left;
+            width: 10px;
+            text-align: center;
+            cursor: pointer;
+            height: 40px;
+            background-color: #BABABA;
+
+        }
+        #center{
+        }
+        #right{
+            float: right;
+        }
+        #right_body{
+            width:400px;
+            float: right;
+        }
+        #right div{
+        }
+    </style>
+    <script>
+
+    </script>
+</head>
+
+<body style="height:100%;font-size: 12px;overflow-x: hidden;">
+<div id="container" style="height:100%">
+    <div class="row" style="background-color:#036;height: 50px;">
+        <div class="col-md-2">
+            <div class="navbar-header ">
+                <a class="navbar-brand" style="color: white" href="../index.html">苗建全文搜索系统</a>
+            </div>
+        </div>
+        <div class="col-md-1" style="color:white;line-height: 50px;border-right: 1px solid #787878;text-align: center;font-size: 20px;">
+            <p class="fa fa-home"> </p>
+
+        </div>
+        <div class="col-md-1" style="background-color:#596b7f;height:100%;">
+            <div style="height:100%;color: white;line-height: 50px;text-align: center">编辑页面</div>
+        </div>
+        <div class="col-md-1" style="height:100%;">
+            <div style="height:100%;color: white;line-height: 50px;text-align: center;cursor: pointer;">报告导出</div>
+        </div>
+        <div class="col-md-3">
+            <div id="baogaodate">
+                <span>报告提交时间：</span> <span>2018年10月21日 18：30  <p class="fa fa-edit"></p></span>
+
+            </div>
+        </div>
+        <div class="col-md-2" style="height:100%;padding: 10px;">
+            <form class="form-line">
+                <div class="form-group">
+                    <select class="form-control" id="orglist" onchange="news.orglistchange()">
+                    </select>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-2">
+            <ul class="nav navbar-top-links navbar-right" style="float:right;">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>公告1</strong>
+                                    <span class="pull-right text-muted">
+                                            <em>2018-01-01</em>
+                                        </span>
+                                </div>
+                                <div>系统维护公告</div>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </div>
+        <!-- <div class="col-md-12">
+
+        </div> -->
+    </div>
+    <div class="row" style="height:100%;">
+        <div class="col-md-12" id="pagemain" style="height: 100%;">
+            <div id="left" style="opacity: 0.1;">
+                <div id="left_body" flag="0">
+                    <!--<div class="form-group input-group">-->
+                        <!--<input type="text" class="form-control">-->
+                        <!--<span class="input-group-btn">-->
+                                                <!--<button class="btn btn-default" type="button"><i class="fa fa-search"></i>-->
+                                                <!--</button>-->
+                                            <!--</span>-->
+                    <!--</div>-->
+                    <div class="fenlei">
+                        <input type="text" class="form-control">
+                        <hr style="height:1px;border:none;border-top:1px solid #c5cace;" />
+                        <div>
+                            <ul class="menulistfenlei" id="fenleilist">
+                            </ul>
+                            <div id="tree"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bar" style="height: 40px;line-height: 40px;border-radius: 0px 5px 5px 0px;" onclick="buju.showorhide('left_body','left')">
+                    <p class="fa fa-chevron-left" id="left_bar"></p>
+                </div >
+            </div>
+            <div id="right" style="background-color:#255625;opacity: 0.1;">
+                <div class="bar"  style="height: 40px; line-height: 40px;border-radius: 5px 0px 0px 5px;"  onclick="buju.showorhide('right_body','right')">
+                    <p class="fa fa-chevron-right" id="right_bar"></p>
+                </div>
+                <div id="right_body" flag="0">
+
+                </div>
+            </div>
+            <div id="center">
+                <div style="width:100%;height: 40px; background-color: #a1aec7"></div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/jquery/jquery.cookies.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/select/select.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="../vendor//tablepaginator/bootstrap-paginator.min.js"></script>
+    <!--datetime-->
+    <script src="../vendor/datapick/bootstrap-datetimepicker.min.js"></script>
+    <script src="../vendor/treeview/treeview.min.js"></script>
+    <script src="../js/componse/common/loading.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="../js/componse/common/date.js"></script>
+    <script src="../js/componse/global/message.js"></script>
+    <script src="../js/componse/common/keyvalue.js"></script>
+    <script src="../js/componse/common/tool.js"></script>
+    <script src="../js/componse/menu/menu.js"></script>
+    <script src="../js/componse/common/init.js"></script>
+    <script src="../js/componse/common/formtool.js"></script>
+    <script src="../js/componse/common/select.js"></script>
+    <script src="../js/componse/news/news.js"></script>
+    <script src="../js/componse/common/commsearch.js"></script>
+    <script src="../js/componse/common/confirm.js"></script>
+    <script src="../js/componse/common/mousedrop.js"></script>
+    <script src="../js/componse/common/buju.js"></script>
+    <script type="text/javascript">
+        var t;
+        //日期插件
+        $(".form_datetime").datetimepicker({
+            format: 'yyyy-mm-dd', //显示格式
+            todayHighlight: 1, //今天高亮
+            minView: "month", //设置只显示到月份
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1,
+            autoclose: 1 //选择后自动关闭
+        });
+        $(document).ready(function () {
+            buju.init("bar");
+            select_bind.orgselect("orglist", function () {
+                var orgid = $("#orglist").val();
+                select_bind.fenleiselect(orgid, "fenleilist");
+                //news.loadnews(1);
+            });
+            select_bind.selectsource("p_source")
+            t = new commsearch("conditions", null, "conditionlist", "searchinput", "conditions",
+                "searchcondition");
+            t.init(t);
+            var mousedrop = new mousefrop("table_newslist","fenleilist");
+            mousedrop.init();
+            var h = document.body.clientHeight;
+            console.log(h);
+
+        });
+        function keyup_submit(e) {
+            var evt = window.event || e;
+            if (evt.keyCode == 13) {
+                alert("a");
+            }
+        }
+    </script>
+</div>
+</body>
+
+</html>
