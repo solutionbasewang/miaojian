@@ -673,16 +673,18 @@ var news = {
                         html="<div id='" + uuid + "' style='width:100%;'>"
                     }
                     $.each(data.data.Items, function (i, o) {
-                        var len=15;
+                        var len=12;
                         html+="<div class='zhankainews' style='width:100%'>";
                         html+="<div style='width:3%;'><input type='checkbox' cid='"+o.Context.Id+"' value='"+o.Context.Id+"'></div>";
-                        html+="<div name='cols' vv='col_title' title='"+o.Context.Title+"' style='width: 27%;' onclick=news.new_open('"+o.Context.Url+"')>"+tool.stringtool.substr(news.news_qingxi(o.Context.Title), len)+"</div>";
-                        html+="<div name='cols' vv='col_medianame' title='"+o.Context.MediaName+"' style='width: 10%;'>"+tool.stringtool.substr(news.news_qingxi(o.Context.MediaName), 4)+"</div>";
-                        html+="<div style='width:15%;' name='cols' vv='col_createtime' title='"+o.Context.PublishTime+"'>"+o.Context.PublishTime.replace("T", " ")+"</div>";
-                        html+="<div style='width:15%;' name='cols' vv='col_keywords' title='"+o.Context.Keywords+"'>"+tool.stringtool.substr(news.news_qingxi(o.Context.Keywords), len)+"</div>";
-                        html+="<div style='width:10%;'>"+"&nbsp;</div>";
+                        html+="<div name='cols' vv='col_title' title='"+o.Context.Title+"' style='width: 22%;' onclick=news.news_select('"+o.Context.Id+"','',this)>"+tool.stringtool.substr(news.news_qingxi(o.Context.Title), len)+"</div>";
+                        html+="<div name='cols' vv='col_medianame' title='"+o.Context.MediaName+"' style='width: 15%;'>"+tool.stringtool.substr(news.news_qingxi(o.Context.MediaName), 4)+"</div>";
+                        html+="<div style='width:15%;font-size:12px;' name='cols' vv='col_createtime' title='"+o.Context.PublishTime+"'>"+o.Context.PublishTime.replace("T", " ")+"</div>";
+                        html+="<div style='width:10%;' name='cols' vv='col_keywords' title='"+o.Context.Keywords+"'>"+tool.stringtool.substr(news.news_qingxi(o.Context.Keywords), len)+"</div>";
+                        html+="<div style='width:10%;' name='cols' vv='col_author'>"+(o.Context.Author==""?"-":o.Context.Author)+"</div>";
+                        html+="<div style='width:13%;' name='cols' vv='col_relativity'>"+(o.Context.Relativity==-1?"敏感":"非敏感")+"</div>";
+
                         html+="<div style='width:20%'>"+"<div class='form-inline tag_action'>";
-                        html+="<a name='zhankai_x' id='s"+o.Id+"' name='shownews' value='"+o.Id+"' onclick=news.news_select('"+o.Context.Id+"','',this) class='tag_a_nodo'><i class='fa fa-info-circle' aria-hidden='true' title='显示属性'></i></a>";
+                        html+="<a name='zhankai_x' id='s"+o.Id+"' name='shownews' value='"+o.Id+"' onclick=news.new_open('"+o.Context.Url+"') class='tag_a_nodo'><i class='fa fa-info-circle' aria-hidden='true' title='显示属性'></i></a>";
                         if(o.Context.ExistsBriefReport)
                         {
                             html+="<a id='j"+o.Context.Id+"'value='"+o.Context.Id+"' onclick=news.record_jianbao(this,event,'"+o.Context.Id+"','"+o.Context.Id+"','"+o.Context.BriefReportGroupId+"') jtype='1' class='tag_a'><i class='fa fa-file-text-o' aria-hidden='true' title='已做简报'></i></a>";
@@ -728,6 +730,7 @@ var news = {
                     $(div).after(html);
                     $(obj).attr("did", uuid);
                     $("#zhankaidivid").val(uuid+","+id);
+                    news.new_showcol();
                 }
 
             })
@@ -738,6 +741,7 @@ var news = {
             $(obj).attr("did","0");
             $(obj).attr("class","fa fa-sort-down");
         }
+        
 
     },
     liulanmoshi: function () {
