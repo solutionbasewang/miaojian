@@ -112,7 +112,7 @@ var buju = {
         $(center_bar).offset({ top: (center_body_right_height/2), left: center_body_right.left-10 });
     },
     screeninit:function () {
-
+        //xian
         var sc = window.screen.height;
         if(sc<=800){
             $("#simple_list").css("height","300px");
