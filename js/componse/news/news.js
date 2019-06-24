@@ -678,7 +678,7 @@ var news = {
                         html+="<div style='width:3%;'><input type='checkbox' cid='"+o.Context.Id+"' value='"+o.Context.Id+"'></div>";
                         html+="<div name='cols' vv='col_title' title='"+o.Context.Title+"' style='width: 22%;' onclick=news.news_select('"+o.Context.Id+"','',this)>"+tool.stringtool.substr(news.news_qingxi(o.Context.Title), len)+"</div>";
                         html+="<div name='cols' vv='col_medianame' title='"+o.Context.MediaName+"' style='width: 15%;'>"+tool.stringtool.substr(news.news_qingxi(o.Context.MediaName), 4)+"</div>";
-                        html+="<div style='width:15%;font-size:12px;' name='cols' vv='col_createtime' title='"+o.Context.PublishTime+"'>"+o.Context.PublishTime.replace("T", " ")+"</div>";
+                        html+="<div style='width:15%;font-size:12px;' name='cols' vv='col_createtime' title='"+o.Context.CreateTime+"'>"+o.Context.CreateTime.replace("T", " ")+"</div>";
                         html+="<div style='width:10%;' name='cols' vv='col_keywords' title='"+o.Context.Keywords+"'>"+tool.stringtool.substr(news.news_qingxi(o.Context.Keywords), len)+"</div>";
                         html+="<div style='width:10%;' name='cols' vv='col_author'>"+(o.Context.Author==""?"-":o.Context.Author)+"</div>";
                         html+="<div style='width:13%;' name='cols' vv='col_relativity'>"+(o.Context.Relativity==-1?"敏感":"非敏感")+"</div>";
@@ -852,7 +852,10 @@ var news = {
         })
     },
     loadnews_simple:function(data){
-        var len = 12;
+        // console.log();
+        var centerwidth = $("#center").attr("widths");
+        console.log(parseFloat(centerwidth));
+        var len = tool.percent_conversion_size(14,parseFloat(centerwidth),0.22);
         $("#table_newslist").html("");
         var xsd="";
         $("#news_xsd span").each(function (i,o) {
@@ -897,7 +900,7 @@ var news = {
                 }
                 html+="<div style='width:15%' title='" + newst.MediaName + "' name='cols' vv='col_medianame'>"+(newst.MediaName==""?"-":tool.stringtool.substr(newst.MediaName, 8)) +"</div>";
                 if(xsd=="0"){
-                    html+="<div style='width:15%' name='cols' vv='col_createtime'>"+ newst.PublishTime.replace("T", " ") +"</div>";
+                    html+="<div style='width:15%' name='cols' vv='col_createtime'>"+ newst.CreateTime.replace("T", " ") +"</div>";
 
                 }
                 else {
@@ -905,10 +908,10 @@ var news = {
 
                 }
                 html+="<div style='width:10%' name='cols' vv='col_keywords'>"+ (newst.Keywords==""?"-":tool.stringtool.substr(newst.Keywords, 5)) +"</div>";
-                html+="<div style='width:10%' name='cols' vv='col_author'>"+(newst.Author==""?"-":newst.Author)+"</div>";
+                html+="<div style='width:8%' name='cols' vv='col_author'>"+(newst.Author==""?"-":newst.Author)+"</div>";
                 html+="<div style='width:5%' name='cols' vv='col_relativity'>"+(newst.Relativity==-1?"敏感":"非敏感") +"</div>";
                 html+="<div style='width:8%' name='colss' vv='col_xsd'>"+ xsd +"<p class='fa fa-sort-down' id='"+obj.groupid+"' style='cursor: pointer' state='0' did='0' onclick=news.zhankai('"+obj.groupid+"',this,1,1)></p></div>";
-                html+="<div style='width:20%'><div class='form-inline tag_action'>" +
+                html+="<div style='width:19%'><div class='form-inline tag_action'>" +
                     "<a id='s"+obj.groupid+"' name='shownews' value='"+newst.Id+"'  onclick=news.new_open('"+newst.Url+"') class='tag_a_nodo'><i class='fa fa-info-circle' aria-hidden='true' title='显示属性'></i></a>";
                     // "<div id='s"+obj.groupid+"' class='jianbao_tag' name='shownews' value='"+newst.Id+"' onclick=news.news_select('"+newst.Id+"','',this)>显</div>";
                 if(newst.ExistsBriefReport)
@@ -1004,7 +1007,7 @@ var news = {
                 }
 
                 html+="<div class='xiangxi_news_twotitle' style='margin-top: 10px;'>";
-                html+="<span>媒体："+newst.MediaName+"</span><span>新闻时间："+newst.PublishTime.replace("T", " ")+"</span><span>特征词："+newst.Keywords+"</span></div>";
+                html+="<span>媒体："+newst.MediaName+"</span><span>新闻时间："+newst.CreateTime.replace("T", " ")+"</span><span>特征词："+newst.Keywords+"</span></div>";
                 html+="<div class='xiangxi_news_body' style='margin-top: 5px;'>" + newst.Summary+"</div>";
 
                 html+="<div class='xiangxi_news_operate' style='margin-top: 5px;'>";
@@ -1380,7 +1383,14 @@ var news = {
             $(o).css("color","#2d4373");
         })
     },
+    news_select_details:function(id){
+        var url = document.urlmanager.base.url + "/context/get/details/"+id;
+        tool.ajaxTool.ajax(url, tool.ajaxTool.ajaxtype.get, null, true, function (data) {
+            $("#yl_context").html(data.data.Content);
+        })
+    },
     news_select:function (id,goupid,obj) {
+        news.news_select_details(id);
         $.each($("span[name='title_select']"),function (i,o) {
                $(o).css("color","#7e94a5");
         });

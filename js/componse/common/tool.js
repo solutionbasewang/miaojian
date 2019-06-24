@@ -151,5 +151,21 @@ var tool = {
         cleandh:function (str) {
             return str.substring(0, str.length-1);
         }
+    },
+    percent_conversion_size:function(font_size,...p){
+        var width=document.documentElement.clientWidth;
+        var nums=p;
+        var size = nums.reduce(function(a,b){
+            return a*b;
+        })*width;
+        return Math.ceil(size/font_size)
+
+
+        // var size=width;
+        // for(var i=0;i<nums.length;i++){
+        //     size=nums[i]*width;
+        // }
+        
+
     }
 }

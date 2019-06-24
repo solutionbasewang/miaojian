@@ -171,7 +171,7 @@
             line-height: 40px;
         }
         .operate_area_title{
-            width: 5%;
+            width: 10%;
             padding-left: 10px;
             font-weight: bolder;
         }
@@ -307,13 +307,13 @@
 <body style="height:100%;font-size: 12px;">
 <div id="container" style="height:100%;overflow-x: hidden;">
 
-    <div class="row" style="background-color:#036;height: 45px;">
+    <div class="row" style="background-color:#213B58;height: 50px;">
         <div class="col-md-2">
-            <div class="navbar-header ">
-                <a class="navbar-brand" style="color: white" href="../index.html">苗建信息系统</a>
+            <div class="navbar-header" style="background-repeat:no-repeat;background-image: url(../images/toplogo-1.png)">
+                <a class="navbar-brand" style="color: white;padding:0px;line-height: 45px;padding-left:90px;" href="../index.html">苗建信息系统</a>
             </div>
         </div>
-        <div class="col-md-8" style="height: 100%;line-height: 45px;">
+        <div class="col-md-8" style="height: 100%;line-height: 50px;">
             <div style="float: left;color: white;width: 72px;text-align: center;"> <p class="fa fa-home"> </p></div>
             <div style="float: left;background-color:#4F6074;color: white;width: 72px;text-align: center;">编辑</div>
             <div style="float: left;color: white;width: 72px;text-align: center;">报告</div>
@@ -322,7 +322,7 @@
         <div class="col-md-2">
             <ul class="nav navbar-top-links navbar-right" style="float:right;">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:#fff;">
                         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
@@ -335,7 +335,7 @@
                 </li>
 
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:#fff;">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
@@ -476,7 +476,7 @@
                 </div>
             </div>
             <div id="operate_area">
-                <div class="operate_area_title">操作</div>
+                <div class="operate_area_title">批量操作</div>
                 <div class="operate_area_body" style="padding: 5px;">
                     <a class="tag_a_nodo" onclick="news.hebing()"><i class="fa fa-object-group" aria-hidden="true" title="批量合并"></i></a>
                     <a class="tag_a_nodo" onclick="news.chaijie()"><i class="fa fa fa-object-ungroup" aria-hidden="true" title="批量拆分"></i></a>
@@ -512,11 +512,11 @@
                         <div style="width:15%" name="cols" vv="col_medianame">媒体名称<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'MediaName')" state="0" key="MediaName" sort="Asc"></p></div>
                         <div style="width:15%" name="cols" vv="col_createtime">时间<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'CreateTime')" state="0" key="CreateTime" sort="Asc"></p></div>
                         <div style="width:10%" name="cols" vv="col_keywords">特征词</div>
-                        <div style="width:10%;display: none;" name="cols" vv="col_author">记者</div>
+                        <div style="width:8%;display: none;" name="cols" vv="col_author">记者</div>
                         <div style="width:5%;display: none;" name="cols" vv="col_relativity">调性</div>
 
                         <div style="width:8%" name="colss" vv="col_xsd">相似度<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'similarytity')" state="0" key="similarytity" sort="Asc"></p></div>
-                        <div style="width:20%">标签</div>
+                        <div style="width:19%">标签</div>
                     </div>
                     <div id="table_newslist">
                     </div>

@@ -3,6 +3,7 @@ var buju = {
         var h = document.body.clientHeight;
         $("#left").css("width","15%");
         $("#center").css("width","65%");
+        $("#center").attr("widths","0.65");
         $("#body_right").css("width","20%");
         var left_width= $("#left").width();
         var bar = $("."+classname).eq(0);
@@ -27,9 +28,11 @@ var buju = {
                 if(right_c.attr("flag")=="0")
                 {
                     $("#center").css("width","80%");
+                    $("#center").attr("widths","0.8");
                 }
                 else {
                     $("#center").css("width","100%");
+                    $("#center").attr("widths","1");
                 }
             }
             else {
@@ -41,9 +44,11 @@ var buju = {
                 if(right_c.attr("flag")=="0")
                 {
                     $("#center").css("width","65%");
+                    $("#center").attr("widths","0.65");
                 }
                 else {
                     $("#center").css("width","85%");
+                    $("#center").attr("widths","0.85");
                 }
             }
         }
@@ -59,9 +64,11 @@ var buju = {
                 if(left_c.attr("flag")=="0")
                 {
                     $("#center").css("width","85%");
+                    $("#center").attr("widths","0.85");
                 }
                 else {
                     $("#center").css("width","100%");
+                    $("#center").attr("widths","1");
                 }
                 // $("#center").css("width","100%");
                 // t.attr("flag","1");
@@ -76,18 +83,14 @@ var buju = {
                 if(left_c.attr("flag")=="0")
                 {
                     $("#center").css("width","65%");
+                    $("#center").attr("widths","0.65");
                 }
                 else {
                     $("#center").css("width","80%");
+                    $("#center").attr("widths","0.8");
                 }
-                // var left_width= $("#body_right").width();
+                
                 $("#right_bar_c").offset({left: $("#center").offset().left+$("#center").width()+10 });
-
-                // $("#center").css("width","65%");
-                // t.attr("flag", "1");
-                // $("#right_bar").attr("class", "fa fa-chevron-right")
-                // var center_body_right =$("#cbody_right").offset();
-                // $("#right_bar_c").offset({left: center_body_right.left-10});
             }
         }
     },
