@@ -556,7 +556,8 @@
                         </div>
                         <div id="yulan_zhaiyao_zhaiyao" class="yulan_zhaiyao_zhaiyao">
                             <div style="font-size: 15px;font-weight: bolder;">摘要</div>
-                            <div id="yl_zhaiyao"></div>
+                            <div id="yl_zhaiyao_fanyi"></div>
+                            <textarea id="yl_zhaiyao"></textarea>
 
                         </div>
                         <div id="yulan_zhaiyao_context" class="yulan_zhaiyao_context">
@@ -566,14 +567,14 @@
                 </div>
 
             </div>
-            <div class="news_proptery" id="news_proptery">
-                <div style="width: 100%;">
+            <div >
+                <div style="width: 100%;" class="news_proptery" id="news_proptery">
                     <div onclick="news.tab_select_p(this,'p_tab')" class="p_select" name="p_t" style="background-color: #BEC5CD;width: 30%;margin: 0px;padding-left: 5px;height: 40px; float: left">简报信息</div>
                     <div onclick="news.tab_select_p(this,'p_fanyi')" name="p_t" style="background-color: #BEC5CD;width: 30%;margin: 0px;padding-left: 5px;height: 40px; float: left">翻译记录</div>
                     <!--<div style="background-color: #BEC5CD;width: 50%;margin: 0px;padding-right: 5px;height: 40px;float: left;text-align: right;" >-->
                         <!--<div style="display: none;cursor: pointer" onclick="news.yulanshowandhide(this)" showflag="0" id="showflag">预览显示</div></div>-->
                     <div style="background-color: #BEC5CD;width: 40%;margin: 0px; float: right;text-align: right;padding-right: 5px;"  >
-                        <button type="button" class="btn btn-default btn-sm" onclick="news.p_edit(this)" flag="0" id="editflag"><p class="fa fa-edit" style="margin-bottom:0px;"></p>进入编辑</button>
+                        <button id="btn_edit" type="button" class="btn btn-default btn-sm" onclick="news.p_edit(this)" flag="0" id="editflag"><p class="fa fa-edit" style="margin-bottom:0px;"></p>进入编辑</button>
                     </div>
 
                 </div>
@@ -586,32 +587,45 @@
                         </td>
                     </tr>
                     <tr style="">
-                        <td style="width: 20%;padding: 5px;">媒体名称</td>
-                        <td style="width:65%;padding: 5px;"><input type="hidden" id="contextid" value="0"><input type="hidden" id="orderid" value="0"> <input class="form-control" style="width: 176px;height: 30px;" id="meitimingcheng"></td>
+                        <td style="width: 25%;padding: 5px;font-family: 'microsoft yahei'">媒体名称</td>
+                        <td style="width:65%;padding: 5px;">
+                            <input type="hidden" id="contextid" value="0"><input type="hidden" id="orderid" value="0"> 
+                            <input  style="width: 176px;height: 22px;" id="meitimingcheng"></td>
                     </tr>
                     <tr>
-                        <td style="width: 20%; padding: 5px;">来源</td>
-                        <td style="width:65%;padding: 5px;"><input class="form-control" style="width: 176px;height: 30px;"  id="laiyuan"></td>
+                        <td style="width: 25%; padding: 5px;">来源</td>
+                        <td style="width:65%;padding: 5px;">
+                            <input style="width: 176px;height: 22px;"   id="laiyuan"></td>
                     </tr>
                     <tr>
-                        <td style="width: 20%; padding: 5px;">标题</td>
-                        <td style="width:65%;padding: 5px;"><input class="form-control" style="width: 176px;height: 30px;"   id="biaoti"></td>
+                        <td style="width: 25%; padding: 5px;">标题</td>
+                        <td style="width:65%;padding: 5px;">
+                            <input style="width: 176px;height: 22px;"    id="biaoti"></td>
                     </tr>
                     <tr>
-                        <td style="width: 20%; padding: 5px;">版面/栏目</td>
-                        <td style="width:65%;padding: 5px;"><input class="form-control" style="width: 176px;height: 30px;"   id="lanmu"></td>
+                        <td style="width: 25%; padding: 5px;">版面/栏目</td>
+                        <td style="width:65%;padding: 5px;">
+                            <input style="width: 176px;height: 22px;"   id="lanmu"></td>
                     </tr>
                     <tr>
-                        <td style="width: 20%; padding: 5px;">字数</td>
-                        <td style="width:65%;padding: 5px;"><input class="form-control"  style="width: 176px;height: 30px;"  id="zishu"></td>
+                        <td style="width: 25%; padding: 5px;">字数</td>
+                        <td style="width:65%;padding: 5px;">
+                            <input style="width: 176px;height: 22px;"   id="zishu"></td>
                     </tr>
                     <tr>
-                        <td style="width: 20%; padding: 5px;">新闻时间</td>
-                        <td style="width:65%;padding: 5px;"><input class="form-control"  style="width: 176px;height: 30px;"  id="xinwenshijian"></td>
+                        <td style="width: 25%; padding: 5px;">新闻时间</td>
+                        <td style="width:65%;padding: 5px;">
+                            <input style="width: 176px;height: 22px;"   id="xinwenshijian"></td>
                     </tr>
                     <tr>
-                        <td style="width: 20%; padding: 5px;">记者</td>
-                        <td style="width:65%;padding: 5px;"><input class="form-control"  style="width: 176px;height: 30px;"  id="jizhe"></td>
+                        <td style="width: 25%; padding: 5px;">记者</td>
+                        <td style="width:65%;padding: 5px;">
+                            <input style="width: 176px;height: 22px;"   id="jizhe"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%; padding: 5px;">摘要批处理</td>
+                        <td style="width:65%;padding: 5px;">
+                            <input type="radio" id="flag_zypcl"></td>
                     </tr>
                 </table>
                 <div class="form-inline" style="padding: 5px;"><label style="font-weight: bolder">自定义属性</label>

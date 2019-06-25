@@ -1423,7 +1423,7 @@ var news = {
                 $("#yl_yjsj").html(newss.CreateTime.replace("T"," "));
                 $("#yl_ycfl").html(newss.Navigation);
                 $("#yl_title").html(newss.Title);
-                $("#yl_zhaiyao").html(newss.Summary);
+                $("#yl_zhaiyao").val(newss.Summary);
                 $("#yl_context").html(newss.Content);
                 var al=[];
                 $.each(newss.Allocations,function (i,o) {
@@ -1449,19 +1449,20 @@ var news = {
                 console.log(al.length);
                 var p = newss.Properties;
                 $.each(p,function (i,o) {
+                    var id=tool.uuidtext();
                     var html="";
                     if(o.Type==4){
                         html="<tr>";
-                        html+="<td style='width: 30%; padding: 5px;' ptype='0' pname='"+o.Name+"'><p class='fa fa-ban' style='color: red' onclick='news.p_dele(this)'></p>"+o.Name+"</td>";
-                        html+="<td style='width:68%;padding: 5px;'><input class='form-control' value='"+o.Value+"'></td>";
+                        html+="<td style='width: 26%; padding: 5px;' ptype='0' pname='"+o.Name+"'><p class='fa fa-ban' style='color: red;margin:0px;' onclick='news.p_dele(this)'></p>"+o.Name+"</td>";
+                        html+="<td style='width:68%;padding: 5px;'><input id='"+id+"' style='width: 176px;height: 22px;' value='"+o.Value+"'></td>";
                         html+="</tr>";
                     }
                     else if(o.Type==2)
                     {
                         html="<tr>";
-                        html+="<td style='width: 30%; padding: 5px;' ptype='2' pname='"+o.Name+"'><p class='fa fa-ban' style='color: red' onclick='news.p_dele(this)'></p>"+o.Name+"</td>";
+                        html+="<td style='width: 26%; padding: 5px;' ptype='2' pname='"+o.Name+"'><p class='fa fa-ban' style='color: red;margin:0px;' onclick='news.p_dele(this)'></p>"+o.Name+"</td>";
                         html+="<td style='width:68%;padding: 5px;'>";
-                        html+="<select class='form-control'>";
+                        html+="<select id='"+id+"' style='width: 176px;height: 22px;'>";
                         $.each(o.DictionaryData.children,function (r,dic) {
                             if(o.Value==dic.value){
                                 html+="<option selected value='"+dic.parentId+"' parentId='"+dic.parentId+"'>"+dic.name+"</option>";
@@ -1477,11 +1478,22 @@ var news = {
                     else if(o.Type==16)
                     {
                         html="<tr>";
-                        html+="<td style='width: 30%; padding: 5px;' ptype='1' pname='"+o.Name+"'><p class='fa fa-ban' style='color: red' onclick='news.p_dele(this)'></p>"+o.Name+"</td>";
-                        html+="<td style='width:68%;padding: 5px;'><input class='form-control' value='"+o.Value+"'></td>";
+                        html+="<td style='width: 26%; padding: 5px;' ptype='1' pname='"+o.Name+"'><p class='fa fa-ban' style='color: red;margin:0px;' onclick='news.p_dele(this)'></p>"+o.Name+"</td>";
+                        html+="<td style='width:68%;padding: 5px;'><input id='"+id+"' style='width: 176px;height: 22px;' value='"+o.Value+"'></td>";
                         html+="</tr>";
                     }
                     $("#plist tbody").append(html);
+                    jeDate("#"+id,{
+                        festival:false,
+                        minDate:"1900-01-01",              //最小日期
+                        maxDate:"2099-12-31",              //最大日期
+                        method:{
+                            choose:function (params) {
+                
+                            }
+                        },
+                        format: "YYYY-MM-DD hh:mm:ss"
+                    });
                 })
                 // $.each(p,function (i,obj) {
                 //     var html=""
@@ -1523,6 +1535,10 @@ var news = {
                 news.hightlight1('yulan_zhaiyao_title');
                 news.hightlight1('yl_zhaiyao');
                 news.hightlight1('yl_context');
+                var p_offset = $("#news_proptery").offset();
+                $("#news_yulan").css("left",p_offset.left-501);
+                $("#news_yulan").css("top",p_offset.top);
+                $("#news_yulan").show();
                 $.bootstrapLoading.end();
             }
         })
@@ -1839,19 +1855,20 @@ var news = {
             }
 
         }
+        var id=tool.uuidtext();
         var html="";
         if(p_type=="0"){
             html="<tr>";
-            html+="<td style='width: 30%; padding: 5px;' ptype='"+p_type+"' pname='"+p_name+"'><p class='fa fa-ban' style='color: red' onclick='news.p_dele(this)'></p>"+p_name+"</td>";
-            html+="<td style='width:68%;padding: 5px;'><input class='form-control'></td>";
+            html+="<td style='width: 26%; padding: 5px;' ptype='"+p_type+"' pname='"+p_name+"'><p class='fa fa-ban' style='color: red;margin:0px;' onclick='news.p_dele(this)'></p>"+p_name+"</td>";
+            html+="<td style='width:68%;padding: 5px;'><input id='"+id+"' style='width: 176px;height: 22px;'/></td>";
             html+="</tr>";
 
         }
         else if(p_type=="1")
         {
             html="<tr>";
-            html+="<td style='width: 30%; padding: 5px;' ptype='"+p_type+"' pname='"+p_name+"'><p class='fa fa-ban' style='color: red' onclick='news.p_dele(this)'></p>"+p_name+"</td>";
-            html+="<td style='width:68%;padding: 5px;'><input size='10' type='text' value='' class='form_datetime form-control'></td>";
+            html+="<td style='width: 26%; padding: 5px;' ptype='"+p_type+"' pname='"+p_name+"'><p class='fa fa-ban' style='color: red;margin:0px;' onclick='news.p_dele(this)'></p>"+p_name+"</td>";
+            html+="<td style='width:68%;padding: 5px;'><input id='"+id+"' size='10' type='text' value='' style='width: 176px;height: 22px;' class='form_datetime'></td>";
             html+="</tr>";
 
         }
@@ -1860,9 +1877,9 @@ var news = {
             var url = document.urlmanager.base.url + "/dictionary/get/listresult/0/null/0/2";
             tool.ajaxTool.ajax(url, tool.ajaxTool.ajaxtype.get, null, false, function (data) {
                 html="<tr>";
-                html+="<td style='width: 30%; padding: 5px;' ptype='"+p_type+"' pname='"+p_name+"'><p class='fa fa-ban' style='color: red' onclick='news.p_dele(this)'></p>"+p_name+"</td>";
+                html+="<td style='width: 26%; padding: 5px;' ptype='"+p_type+"' pname='"+p_name+"'><p class='fa fa-ban' style='color: red;margin:0px;' onclick='news.p_dele(this)'></p>"+p_name+"</td>";
                 html+="<td style='width:68%;padding: 5px;'>";
-                html+="<select class='form-control'>";
+                html+="<select id='"+id+"' style='width: 176px;height: 22px;'>";
                 $.each(data.data,function (r,dic) {
                     if(p_source==dic.id){
                         $.each(dic.children,function (i,chi) {
@@ -1879,14 +1896,26 @@ var news = {
 
         }
         $("#plist tbody").append(html);
-        $(".form_datetime").datetimepicker({
-            format: 'yyyy-mm-dd', //显示格式
-            todayHighlight: 1, //今天高亮
-            minView: "month", //设置只显示到月份
-            startView: 2,
-            forceParse: 0,
-            showMeridian: 1,
-            autoclose: 1 //选择后自动关闭
+        // $(".form_datetime").datetimepicker({
+        //     format: 'yyyy-mm-dd', //显示格式
+        //     todayHighlight: 1, //今天高亮
+        //     minView: "month", //设置只显示到月份
+        //     startView: 2,
+        //     forceParse: 0,
+        //     showMeridian: 1,
+        //     autoclose: 1 //选择后自动关闭
+        // });
+        
+        jeDate("#"+id,{
+            festival:false,
+            minDate:"1900-01-01",              //最小日期
+            maxDate:"2099-12-31",              //最大日期
+            method:{
+                choose:function (params) {
+    
+                }
+            },
+            format: "YYYY-MM-DD hh:mm:ss"
         });
 
     },
@@ -2110,7 +2139,6 @@ var news = {
        }
        else {
            $(obj).html("<p class='fa fa-edit' style='margin-bottom:0px;'></p>进入编辑");
-
            $(obj).attr("flag","0");
            $("#flag_add").hide();
            $("#zdy_operate").hide();

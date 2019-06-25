@@ -28,6 +28,9 @@ var tool = {
     uuid:function(){
         return (tool.s4()+tool.s4()+"-"+tool.s4()+"-"+tool.s4()+"-"+tool.s4()+"-"+tool.s4()+tool.s4()+tool.s4());
     },
+    uuidtext:function(){
+        return "t"+(tool.s4()+tool.s4()+""+tool.s4()+""+tool.s4()+""+tool.s4()+""+tool.s4()+tool.s4()+tool.s4());
+    },
     ajaxTool: {
         ajaxtype: {
             post: "post",
