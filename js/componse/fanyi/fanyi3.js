@@ -81,6 +81,7 @@ var fanyi={
         $("#" + id).attr("class","new_type_select");
     },
     load_order:function (page) {
+        $("#pagenum").val(page);
         $.bootstrapLoading.start({ loadingTips: "正在处理数据，请稍候..." });
         fanyi.cleandata();
         var pagesize=30;
@@ -254,6 +255,12 @@ var fanyi={
                 html += "<td>" + o.Operator.realname + "</td>";
                 html += "</tr>";
                 $("#itemlist tbody").append(html);
+                if(o.ItemType==0){
+                    $("#engtitle").val(o.Data);
+                }
+                else if(o.ItemType==1){
+                    $("#engzhaiyao").val(o.Data);
+                }
             }
         })
     },
@@ -266,27 +273,46 @@ var fanyi={
             html+="<div style='width:30%;' title='"+o.Items[0].Context.MediaName+"'>"+o.Items[0].Context.MediaName+"</div>";
             html+="<div style='width:20%;' title=''>"+o.Items[0].Context.CreateTime.replace('T',' ')+"</div>";
             html+="<div style='width:20%;' title=''>";
-            if(o.IsPressing) {
-                html += "<a class='tag_a_jj'><i class='fa fa-globe' aria-hidden='true'></i></a>";
+            // if(o.Items[0].Context.TranslateStatus==) {
+            //     html += "<a class='tag_a_jj'><i class='fa fa-globe' aria-hidden='true'></i></a>";
+            // }
+            // else {
+            //     html += "<a class='tag_a'><i class='fa fa-globe' aria-hidden='true'></i></a>";
+            // }
+            if(o.Items[0].Context.TranslateStatus==0){
+                html+="<a  class='tag_a_nodo'><i class='fa fa-globe' aria-hidden='true' title='申请翻译'></i></a>";
             }
-            else {
-                html += "<a class='tag_a'><i class='fa fa-globe' aria-hidden='true'></i></a>";
+            else if(o.Items[0].Context.TranslateStatus==2) {
+                html+="<a class='tag_a_ytz'><i class='fa fa-globe' aria-hidden='true' title='已通知'></i></a>";
+                // html+="<div class='ytz_tag' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'>译</div>";
+            }
+            else if(o.Items[0].Context.TranslateStatus==3) {
+                html+="<a  class='tag_a_jj'><i class='fa fa-globe' aria-hidden='true' title='紧急'></i></a>";
+                // html+="<div class='jz_tag' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'>译</div>";
+            }
+            else if(o.Items[0].Context.TranslateStatus==5) {
+                html+="<a class='tag_a_fyz'><i class='fa fa-circle-o-notch' aria-hidden='true' title='翻译中'></i></a>";
+
+                // html+="<div class='fyz_tag' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'>中</div>";
+            }
+            else if(o.Items[0].Context.TranslateStatus==1) {
+                html+="<a class='tag_a_ywc' ><i class='fa fa-globe' aria-hidden='true' title='翻译完成'></i></a>";
             }
             if(o.Items[0].Context.GeneratedDayReport) {
-                html += "<a class='tag_a_do'><i class='fa fa-sun-o' aria-hidden='true'></i></a>";
+                html += "<a class='tag_a_do' title='已加入日报'><i class='fa fa-sun-o' aria-hidden='true'></i></a>";
             }
             else {
-                html += "<a class='tag_a_nodo'><i class='fa fa-sun-o' aria-hidden='true'></i></a>";
+                html += "<a class='tag_a_nodo' title='未加入日报'><i class='fa fa-sun-o' aria-hidden='true'></i></a>";
             }
             if(o.Items[0].Context.GeneratedClipsReport)
             {
-                html+="<a class='tag_a_do'><i class='fa fa-file-text-o' aria-hidden='true'></i></a>"
+                html+="<a class='tag_a_do' title='已加入简报'><i class='fa fa-file-text-o' aria-hidden='true'></i></a>"
             }
             else {
-                html+="<a class='tag_a_nodo'><i class='fa fa-file-text-o' aria-hidden='true'></i></a>"
+                html+="<a class='tag_a_nodo' title='未加入简报'><i class='fa fa-file-text-o' aria-hidden='true'></i></a>"
 
             }
-
+            html+="<a class='tag_a_nodo' title='独立翻译' onclick=fanyi.dlfanyi('"+o.Id+"')><i class='fa fa-map-pin' aria-hidden='true'></i></a>"
 
             html+="</div>";
             html+="</div>";
@@ -298,6 +324,22 @@ var fanyi={
             $(o).attr("class","");
         })
     },
+    dlfanyi:function(orderid){
+        event.stopPropagation();
+        $.bootstrapLoading.start({ loadingTips: "正在处理数据，请稍候..." });
+        var eurl= document.urlmanager.base.url + "/order/copy/"+orderid;
+                tool.ajaxTool.ajax(eurl, tool.ajaxTool.ajaxtype.get, null, true, function (data) {
+                    $.bootstrapLoading.end();
+                    if (data.res != 0) {
+                        alert(data.msg);
+                    }
+                    else {
+                        alert("添加独立翻译完成");
+                        fanyi.load_order($("#pagenum").val());
+                    }
+                })
+                return false;
+            },
     newsedit:function (obj) {
         var contextid=$("#contextid").val();
         var orderid=$("#orderid").val();

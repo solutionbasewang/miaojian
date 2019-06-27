@@ -423,6 +423,7 @@ var news = {
                     alert("系统错误");
                 } else {
                     // news.loadnews(1);
+                    $(obj).attr("orderid",data.data.Id);
                     $("#orderid").val(data.data.Id);
                     $(obj).attr("class","tag_a_ytz");
                     $(obj).attr("fystate","2");
@@ -452,6 +453,7 @@ var news = {
                 if (data.res != 0) {
                     alert("系统错误");
                 } else {
+                    $(obj).attr("fystate","0");
                     $(obj).attr("class","tag_a_nodo");
                 }
             })
@@ -461,16 +463,18 @@ var news = {
             $.bootstrapLoading.end();
         }
         else if(orderstate==1){
-            url+="/order/status/change/"+orderid+"/2";
-            tool.ajaxTool.ajax(url, tool.ajaxTool.ajaxtype.get, null, true, function (data) {
-                $.bootstrapLoading.end();
-                if (data.res != 0) {
-                    alert("系统错误");
-                } else {
-                    //news.loadnews(1);
-                    $(obj).attr("class","tag_a_ywc");
-                }
-            })
+            alert("该新闻已经翻译完成，不能再发起翻译申请");
+            $.bootstrapLoading.end();
+            // url+="/order/status/change/"+orderid+"/2";
+            // tool.ajaxTool.ajax(url, tool.ajaxTool.ajaxtype.get, null, true, function (data) {
+            //     $.bootstrapLoading.end();
+            //     if (data.res != 0) {
+            //         alert("系统错误");
+            //     } else {
+            //         //news.loadnews(1);
+            //         $(obj).attr("class","tag_a_ywc");
+            //     }
+            // })
         }
         // var url = document.urlmanager.base.url + "/order/apply";
 
@@ -673,17 +677,18 @@ var news = {
                         html="<div id='" + uuid + "' style='width:100%;'>"
                     }
                     $.each(data.data.Items, function (i, o) {
-                        var len=12;
+                        var centerwidth = $("#center").attr("widths");
+                        var len=tool.percent_conversion_size(14,parseFloat(centerwidth),0.22);
                         html+="<div class='zhankainews' style='width:100%'>";
                         html+="<div style='width:3%;'><input type='checkbox' cid='"+o.Context.Id+"' value='"+o.Context.Id+"'></div>";
                         html+="<div name='cols' vv='col_title' title='"+o.Context.Title+"' style='width: 22%;' onclick=news.news_select('"+o.Context.Id+"','',this)>"+tool.stringtool.substr(news.news_qingxi(o.Context.Title), len)+"</div>";
                         html+="<div name='cols' vv='col_medianame' title='"+o.Context.MediaName+"' style='width: 15%;'>"+tool.stringtool.substr(news.news_qingxi(o.Context.MediaName), 4)+"</div>";
                         html+="<div style='width:15%;font-size:12px;' name='cols' vv='col_createtime' title='"+o.Context.CreateTime+"'>"+o.Context.CreateTime.replace("T", " ")+"</div>";
                         html+="<div style='width:10%;' name='cols' vv='col_keywords' title='"+o.Context.Keywords+"'>"+tool.stringtool.substr(news.news_qingxi(o.Context.Keywords), len)+"</div>";
-                        html+="<div style='width:10%;' name='cols' vv='col_author'>"+(o.Context.Author==""?"-":o.Context.Author)+"</div>";
-                        html+="<div style='width:13%;' name='cols' vv='col_relativity'>"+(o.Context.Relativity==-1?"敏感":"非敏感")+"</div>";
-
-                        html+="<div style='width:20%'>"+"<div class='form-inline tag_action'>";
+                        html+="<div style='width:8%;' name='cols' vv='col_author'>"+(o.Context.Author==""?"-":o.Context.Author)+"</div>";
+                        html+="<div style='width:5%;' name='cols' vv='col_relativity'>"+(o.Context.Relativity==-1?"敏感":"非敏感")+"</div>";
+                        html+="<div style='width:8%;' name='colss' vv='col_xsd'>&nbsp;</div>";
+                        html+="<div style='width:19%'>"+"<div class='form-inline tag_action'>";
                         html+="<a name='zhankai_x' id='s"+o.Id+"' name='shownews' value='"+o.Id+"' onclick=news.new_open('"+o.Context.Url+"') class='tag_a_nodo'><i class='fa fa-info-circle' aria-hidden='true' title='显示属性'></i></a>";
                         if(o.Context.ExistsBriefReport)
                         {
@@ -881,30 +886,29 @@ var news = {
                 html = "<div selectstate='0' onmousedown=news.news_up('"+obj.groupid+"') >";
                 if(newst.Relativity=="-1"){
                     if(newst.IsSofted){
-                        html+="<div style='width:3%'><input id='c"+newst.Id+"' type='checkbox'  groupid='"+obj.groupid+"' value='"+newst.Id+"' jbid='"+newst.BriefReportGroupId+"' rbid='"+newst.DayReportGroupId+"'/></div><div name='cols' vv='col_title' title='"+news.news_qingxi(newst.Title)+"' style='width:22%;'><img src='../images/img1.png'/><span name='title_select' style='cursor: pointer;color: #7e94a5' onclick=news.news_select('"+newst.Id+"','',this)>" + tool.stringtool.substr(news.news_qingxi(newst.Title), len) +"</span><span style='background-color: #b52b27;color:#ffffff;width:20px;text-align: center;height: 20px;line-height: 20px;margin-right: 10%;'>敏</span><span style='color: #b52b27'></span></div>";
-
+                        html+="<div style='width:3%'><input id='c"+newst.Id+"' type='checkbox'  groupid='"+obj.groupid+"' value='"+newst.Id+"' jbid='"+newst.BriefReportGroupId+"' rbid='"+newst.DayReportGroupId+"'/></div><div name='cols' vv='col_title' title='"+news.news_qingxi(newst.Title)+"' style='width:22%;'><img src='../images/img1.png'/><span name='title_select' style='cursor: pointer;color: #7e94a5' onclick=news.news_select('"+newst.Id+"','"+obj.groupid+"',this)>" + tool.stringtool.substr(news.news_qingxi(newst.Title), len) +"</span><span style='background-color: #b52b27;color:#ffffff;width:20px;text-align: center;height: 20px;line-height: 20px;margin-right: 10%;'>敏</span><span style='color: #b52b27'></span></div>";
                     }
                     else {
-                        html+="<div style='width:3%'><input id='c"+newst.Id+"' type='checkbox'  groupid='"+obj.groupid+"' value='"+newst.Id+"' jbid='"+newst.BriefReportGroupId+"' rbid='"+newst.DayReportGroupId+"'/></div><div name='cols' vv='col_title' title='"+news.news_qingxi(newst.Title)+"' style='width:22%;'><img src='../images/img1.png'/><span name='title_select' style='cursor: pointer;' onclick=news.news_select('"+newst.Id+"','',this)>" + tool.stringtool.substr(news.news_qingxi(newst.Title), len) +"</span><span style='background-color: #b52b27;color:#ffffff;width:20px;text-align: center;height: 20px;line-height: 20px;margin-right: 10%;'>敏</span><span style='color: #b52b27'></span></div>";
+                        html+="<div style='width:3%'><input id='c"+newst.Id+"' type='checkbox'  groupid='"+obj.groupid+"' value='"+newst.Id+"' jbid='"+newst.BriefReportGroupId+"' rbid='"+newst.DayReportGroupId+"'/></div><div name='cols' vv='col_title' title='"+news.news_qingxi(newst.Title)+"' style='width:22%;'><img src='../images/img1.png'/><span name='title_select' style='cursor: pointer;' onclick=news.news_select('"+newst.Id+"','"+obj.groupid+"',this)>" + tool.stringtool.substr(news.news_qingxi(newst.Title), len) +"</span><span style='background-color: #b52b27;color:#ffffff;width:20px;text-align: center;height: 20px;line-height: 20px;margin-right: 10%;'>敏</span><span style='color: #b52b27'></span></div>";
 
                     }
                 }
                 else {
                     if(newst.IsSofted) {
-                        html+="<div style='width:3%'><input id='c"+newst.Id+"' type='checkbox'  groupid='"+obj.groupid+"' value='"+newst.Id+"' jbid='"+newst.BriefReportGroupId+"' rbid='"+newst.DayReportGroupId+"'/></div><div name='cols' vv='col_title' title='"+news.news_qingxi(newst.Title)+"' style='width:22%;'><img src='../images/img1.png'/><span name='title_select' style='cursor: pointer;color: #7e94a5' onclick=news.news_select('"+newst.Id+"','',this)>" + tool.stringtool.substr(news.news_qingxi(newst.Title), len) +"</span></div>";
+                        html+="<div style='width:3%'><input id='c"+newst.Id+"' type='checkbox'  groupid='"+obj.groupid+"' value='"+newst.Id+"' jbid='"+newst.BriefReportGroupId+"' rbid='"+newst.DayReportGroupId+"'/></div><div name='cols' vv='col_title' title='"+news.news_qingxi(newst.Title)+"' style='width:22%;'><img src='../images/img1.png'/><span name='title_select' style='cursor: pointer;color: #7e94a5' onclick=news.news_select('"+newst.Id+"','"+obj.groupid+"',this)>" + tool.stringtool.substr(news.news_qingxi(newst.Title), len) +"</span></div>";
                     }
                     else {
-                        html+="<div style='width:3%'><input id='c"+newst.Id+"' type='checkbox'  groupid='"+obj.groupid+"' value='"+newst.Id+"' jbid='"+newst.BriefReportGroupId+"' rbid='"+newst.DayReportGroupId+"'/></div><div name='cols' vv='col_title' title='"+news.news_qingxi(newst.Title)+"' style='width:22%;'><img src='../images/img1.png'/><span name='title_select' style='cursor: pointer' onclick=news.news_select('"+newst.Id+"','',this)>" + tool.stringtool.substr(news.news_qingxi(newst.Title), len) +"</span></div>";
+                        html+="<div style='width:3%'><input id='c"+newst.Id+"' type='checkbox'  groupid='"+obj.groupid+"' value='"+newst.Id+"' jbid='"+newst.BriefReportGroupId+"' rbid='"+newst.DayReportGroupId+"'/></div><div name='cols' vv='col_title' title='"+news.news_qingxi(newst.Title)+"' style='width:22%;'><img src='../images/img1.png'/><span name='title_select' style='cursor: pointer' onclick=news.news_select('"+newst.Id+"','"+obj.groupid+"',this)>" + tool.stringtool.substr(news.news_qingxi(newst.Title), len) +"</span></div>";
 
                     }
                 }
                 html+="<div style='width:15%' title='" + newst.MediaName + "' name='cols' vv='col_medianame'>"+(newst.MediaName==""?"-":tool.stringtool.substr(newst.MediaName, 8)) +"</div>";
                 if(xsd=="0"){
-                    html+="<div style='width:15%' name='cols' vv='col_createtime'>"+ newst.CreateTime.replace("T", " ") +"</div>";
+                    html+="<div style='width:15%' name='cols' vv='col_createtime'>"+ news_master.Context.CreateTime.replace("T", " ") +"</div>";
 
                 }
                 else {
-                    html+="<div style='width:15%' name='cols' vv='col_createtime'>"+ news_master.CreateTime.replace("T", " ") +"</div>";
+                    html+="<div style='width:15%' name='cols' vv='col_createtime'>"+ news_master.Context.CreateTime.replace("T", " ") +"</div>";
 
                 }
                 html+="<div style='width:10%' name='cols' vv='col_keywords'>"+ (newst.Keywords==""?"-":tool.stringtool.substr(newst.Keywords, 5)) +"</div>";
@@ -914,7 +918,7 @@ var news = {
                 html+="<div style='width:19%'><div class='form-inline tag_action'>" +
                     "<a id='s"+obj.groupid+"' name='shownews' value='"+newst.Id+"'  onclick=news.new_open('"+newst.Url+"') class='tag_a_nodo'><i class='fa fa-info-circle' aria-hidden='true' title='显示属性'></i></a>";
                     // "<div id='s"+obj.groupid+"' class='jianbao_tag' name='shownews' value='"+newst.Id+"' onclick=news.news_select('"+newst.Id+"','',this)>显</div>";
-                if(newst.ExistsBriefReport)
+                if(newst.GeneratedClipsReport)
                 {
                     html+="<a id='j"+newst.Id+"'value='"+newst.Id+"' onclick=news.record_jianbao(this,event,'"+newst.Id+"','"+obj.groupid+"','"+newst.BriefReportGroupId+"') jtype='1' class='tag_a'><i class='fa fa-file-text-o' aria-hidden='true' title='已做简报'></i></a>";
                     // html+="<div id='j"+obj.groupid+"' class='do_jianbao_tag' value='"+newst.Id+"' onclick=news.record_jianbao(this,event,'"+newst.Id+"','"+obj.groupid+"','"+newst.BriefReportGroupId+"') jtype='1'>简</div>";
@@ -924,7 +928,7 @@ var news = {
                     html+="<a id='j"+newst.Id+"'value='"+newst.Id+"' onclick=news.record_jianbao(this,event,'"+newst.Id+"','"+obj.groupid+"','"+newst.BriefReportGroupId+"') jtype='0' class='tag_a_nodo'><i class='fa fa-file-text-o' aria-hidden='true' title='加入简报'></i></a>";
 
                 }
-                if(newst.ExistsDayReport)
+                if(newst.GeneratedDayReport)
                 {
                     html+="<a id='r"+newst.Id+"' class='tag_a' value='"+newst.Id+"' onclick=news.record_ribao(this,event,'"+newst.Id+"','"+obj.groupid+"','"+newst.DayReportGroupId+"') rtype='1'><i class='fa fa-sun-o' aria-hidden='true' title='已做日报'></i></a>";
                 }
@@ -932,23 +936,23 @@ var news = {
                     html+="<a id='r"+newst.Id+"' class='tag_a_nodo' value='"+newst.Id+"' onclick=news.record_ribao(this,event,'"+newst.Id+"','"+obj.groupid+"','"+newst.DayReportGroupId+"') rtype='0'><i class='fa fa-sun-o' aria-hidden='true' title='加入日报'></i></a>";
                 }
                 if(newst.TranslateStatus==0){
-                    html+="<a id='f"+newst.Id+"' class='tag_a_nodo' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'><i class='fa fa-globe' aria-hidden='true' title='申请翻译'></i></a>";
+                    html+="<a id='f"+newst.Id+"' class='tag_a_nodo' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' orderid='"+newst.OrderId+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'><i class='fa fa-globe' aria-hidden='true' title='申请翻译'></i></a>";
                 }
                 else if(newst.TranslateStatus==2) {
-                    html+="<a id='f"+newst.Id+"' class='tag_a_ytz' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'><i class='fa fa-globe' aria-hidden='true' title='已通知'></i></a>";
+                    html+="<a id='f"+newst.Id+"' class='tag_a_ytz' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' orderid='"+newst.OrderId+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'><i class='fa fa-globe' aria-hidden='true' title='已通知'></i></a>";
                     // html+="<div class='ytz_tag' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'>译</div>";
                 }
                 else if(newst.TranslateStatus==3) {
-                    html+="<a id='f"+newst.Id+"' class='tag_a_jj' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'><i class='fa fa-globe' aria-hidden='true' title='紧急'></i></a>";
+                    html+="<a id='f"+newst.Id+"' class='tag_a_jj' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' orderid='"+newst.OrderId+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'><i class='fa fa-globe' aria-hidden='true' title='紧急'></i></a>";
                     // html+="<div class='jz_tag' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'>译</div>";
                 }
                 else if(newst.TranslateStatus==5) {
-                    html+="<a id='f"+newst.Id+"' class='tag_a_fyz' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'><i class='fa fa-globe' aria-hidden='true' title='已通知'></i></a>";
+                    html+="<a id='f"+newst.Id+"' class='tag_a_fyz' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' orderid='"+newst.OrderId+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'><i class='fa fa-circle-o-notch' aria-hidden='true' title='翻译中'></i></a>";
 
                     // html+="<div class='fyz_tag' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'>中</div>";
                 }
                 else if(newst.TranslateStatus==1) {
-                    html+="<a id='f"+newst.Id+"' class='tag_a_ywc' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'><i class='fa fa-globe' aria-hidden='true' title='翻译完成'></i></a>";
+                    html+="<a id='f"+newst.Id+"' class='tag_a_ywc' fystate='"+newst.TranslateStatus+"' value='"+newst.Id+"' orderid='"+newst.OrderId+"' onclick=news.joinfanyi(this,event,'"+newst.Id+"',"+newst.TranslateStatus+",'"+newst.OrderId+"') rtype='1'><i class='fa fa-globe' aria-hidden='true' title='翻译完成'></i></a>";
                 }
 
                 html+="<a onclick=news.dele('"+newst.Id+"',this) class='tag_a_nodo'><p class='fa fa-trash-o' ></p></a>";
@@ -988,19 +992,19 @@ var news = {
                 html+="<div style='width:95%;' class='xiangxi_body'>";
                 if(newst.IsSofted){
                     if(newst.Relativity=="-1"){
-                        html+="<div class='xiangxi_news_title' style='color:#7e94a5'><span name='title_select' onclick=news.news_select('"+newst.Id+"','',this)>"+newst.Title+"</span><span style='background-color: #b52b27;color:#ffffff;width:20px;text-align: center;height: 20px;line-height: 20px;'>敏</span><span style='color: #3d8b3d'>("+obj.Similarity+")</span> <p class='fa fa-sort-down' id='"+obj.groupid+"' style='cursor: pointer' state='0' did='0' onclick=news.zhankai('"+obj.groupid+"',this,1,2)></p></div>";
+                        html+="<div class='xiangxi_news_title' style='color:#7e94a5'><span name='title_select' onclick=news.news_select('"+newst.Id+"','"+obj.groupid+"',this)>"+newst.Title+"</span><span style='background-color: #b52b27;color:#ffffff;width:20px;text-align: center;height: 20px;line-height: 20px;'>敏</span><span style='color: #3d8b3d'>("+obj.Similarity+")</span> <p class='fa fa-sort-down' id='"+obj.groupid+"' style='cursor: pointer' state='0' did='0' onclick=news.zhankai('"+obj.groupid+"',this,1,2)></p></div>";
                     }
                     else {
-                        html+="<div class='xiangxi_news_title' style='color:#7e94a5'><span name='title_select' onclick=news.news_select('"+newst.Id+"','',this)>"+newst.Title+"</span><span style='color: #3d8b3d'>("+obj.Similarity+")</span> <p class='fa fa-sort-down' id='"+obj.groupid+"' style='cursor: pointer' state='0' did='0' onclick=news.zhankai('"+obj.groupid+"',this,1,2)></p></div>";
+                        html+="<div class='xiangxi_news_title' style='color:#7e94a5'><span name='title_select' onclick=news.news_select('"+newst.Id+"','"+obj.groupid+"',this)>"+newst.Title+"</span><span style='color: #3d8b3d'>("+obj.Similarity+")</span> <p class='fa fa-sort-down' id='"+obj.groupid+"' style='cursor: pointer' state='0' did='0' onclick=news.zhankai('"+obj.groupid+"',this,1,2)></p></div>";
                     }
                 }
                 else {
                     if(newst.Relativity=="-1") {
-                        html+="<div class='xiangxi_news_title'><span onclick=news.news_select('"+newst.Id+"','',this)>"+newst.Title+"</span><span style='background-color: #b52b27;color:#ffffff;width:20px;text-align: center;height: 20px;line-height: 20px;'>敏</span><span style='color: #3d8b3d'>("+obj.Similarity+")</span> <p class='fa fa-sort-down' id='"+obj.groupid+"' style='cursor: pointer' state='0' did='0' onclick=news.zhankai('"+obj.groupid+"',this,1,2)></p></div>";
+                        html+="<div class='xiangxi_news_title'><span onclick=news.news_select('"+newst.Id+"','"+obj.groupid+"',this)>"+newst.Title+"</span><span style='background-color: #b52b27;color:#ffffff;width:20px;text-align: center;height: 20px;line-height: 20px;'>敏</span><span style='color: #3d8b3d'>("+obj.Similarity+")</span> <p class='fa fa-sort-down' id='"+obj.groupid+"' style='cursor: pointer' state='0' did='0' onclick=news.zhankai('"+obj.groupid+"',this,1,2)></p></div>";
 
                     }
                     else {
-                        html+="<div class='xiangxi_news_title'><span onclick=news.news_select('"+newst.Id+"','',this)>"+newst.Title+"</span><span style='color: #3d8b3d'>("+obj.Similarity+")</span> <p class='fa fa-sort-down' id='"+obj.groupid+"' style='cursor: pointer' state='0' did='0' onclick=news.zhankai('"+obj.groupid+"',this,1,2)></p></div>";
+                        html+="<div class='xiangxi_news_title'><span onclick=news.news_select('"+newst.Id+"','"+obj.groupid+"',this)>"+newst.Title+"</span><span style='color: #3d8b3d'>("+obj.Similarity+")</span> <p class='fa fa-sort-down' id='"+obj.groupid+"' style='cursor: pointer' state='0' did='0' onclick=news.zhankai('"+obj.groupid+"',this,1,2)></p></div>";
 
                     }
 
@@ -1410,6 +1414,7 @@ var news = {
                 tool.localStorageTool.setLocalStorage("tempnews",JSON.stringify(data.data));
                 $("#contextid").val(data.Id);
                 $("#orderid").val(data.data.OrderId);
+                $("#groupid").val(goupid);
                 $("#plist tbody").html("");
                 var newss=data.data;
                 $("#biaoti").val(newss.Title);
@@ -1422,9 +1427,12 @@ var news = {
                 $("#contextid").val(newss.Id);
                 $("#yl_yjsj").html(newss.CreateTime.replace("T"," "));
                 $("#yl_ycfl").html(newss.Navigation);
+                $("#yl_title_fy").html("");
                 $("#yl_title").html(newss.Title);
                 $("#yl_zhaiyao").val(newss.Summary);
-                $("#yl_context").html(newss.Content);
+                $("#yl_zhaiyao_fy").html("");
+                news.load_fanyilog();
+                // $("#yl_context").html(newss.Content);
                 var al=[];
                 $.each(newss.Allocations,function (i,o) {
                     var flag=true;
@@ -2036,7 +2044,7 @@ var news = {
                         alert("系统错误");
                     }
                         else {
-
+                            news.batchsave();
                             alert("保存成功");
 
                         }
@@ -2078,6 +2086,31 @@ var news = {
 
 
 
+    },
+    batchsave:function(){
+        var url = document.urlmanager.base.url + "/context/group/batch/update/summaryandtitle";
+        
+        var param={
+            ContextId: $("#contextid").val(),
+            GroupId: $("#groupid").val(),
+            IsBatch: false,
+            Summary: $("#yl_zhaiyao").val(),
+            Title: $("#biaoti").val()
+          }
+          console.log(JSON.stringify(param));
+          if($("#flag_zypcl").prop('checked')){
+              param.IsBatch=true;
+          }
+          tool.ajaxTool.ajax(url, tool.ajaxTool.ajaxtype.post, param, false, function (data) {
+            if (data.res >=-99&&data.res<0) {
+                alert(data.msg);
+            }
+            else if(data.res<-99){
+                alert("系统错误");
+            }
+
+
+        })
     },
     context_save:function(){
         var newobj={};
@@ -2378,7 +2411,6 @@ var news = {
                 alert("系统错误");
             } else {
                 news.load_log(data.data.Items);
-
             }
             $.bootstrapLoading.end();
         })
@@ -2398,6 +2430,12 @@ var news = {
                 html += "<td>" + o.Operator.realname + "</td>";
                 html += "</tr>";
                 $("#itemlist tbody").append(html);
+                if(o.ItemType==0){
+                    $("#yl_title_fy").html(o.Data);
+                }
+                else if(o.ItemType==1){
+                    $("#yl_zhaiyao_fy").html(o.Data);
+                }
             }
         })
     },

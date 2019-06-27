@@ -228,6 +228,23 @@
             display: none;
             overflow: auto;
         }
+        .tag_a_do{
+            display: block;
+            float: left;
+            margin-right: 8px;
+            /*padding: 2px;*/
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            font-size: 14px;
+            background: linear-gradient(to bottom,#f6f6f6 0,#e8e8e8 50%,#dddddd 100%);
+            border: 1px solid #b5b5b5;
+            border-radius: 2px;
+            color: #3588D4;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 5px
+        }
         .tag_a{
             display: block;
             float: left;
@@ -275,6 +292,57 @@
             border: 1px solid #b5b5b5;
             border-radius: 2px;
             color: #2b2b2b;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 5px
+        }
+        .tag_a_fyz{
+            display: block;
+            float: left;
+            margin-right: 8px;
+            /*padding: 2px;*/
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            font-size: 14px;
+            background: linear-gradient(to bottom,#f6f6f6 0,#e8e8e8 50%,#dddddd 100%);
+            border: 1px solid #b5b5b5;
+            border-radius: 2px;
+            color:#3588D4 !important;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 5px
+        }
+        .tag_a_ytz{
+            display: block;
+            float: left;
+            margin-right: 8px;
+            /*padding: 2px;*/
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            font-size: 14px;
+            background: linear-gradient(to bottom,#f6f6f6 0,#e8e8e8 50%,#dddddd 100%);
+            border: 1px solid #b5b5b5;
+            border-radius: 2px;
+            color: #7AB141;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 5px
+        }
+        .tag_a_ywc{
+            display: block;
+            float: left;
+            margin-right: 8px;
+            /*padding: 2px;*/
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            font-size: 14px;
+            background: linear-gradient(to bottom,#f6f6f6 0,#e8e8e8 50%,#dddddd 100%);
+            border: 1px solid #b5b5b5;
+            border-radius: 2px;
+            color: #CCCDD7 !important;
             text-align: center;
             box-sizing: border-box;
             margin-top: 5px
@@ -488,7 +556,7 @@
                     <div id="table_newslist">
 
                     </div>
-
+                    <input type="hidden" id="pagenum"/>
                 </div>
 
             </div>
@@ -912,8 +980,8 @@
      });
     buju.init("bar","center_bar");
     $(document).ready(function () {
-        $("#btime").val(moment().add(-24,"hour").format("YYYY-MM-DD hh:00:00"))
-        $("#etime").val(moment().format("YYYY-MM-DD hh:00:00"))
+        $("#btime").val(moment().add(-24,"hour").format("YYYY-MM-DD HH:00:00"))
+        $("#etime").val(moment().format("YYYY-MM-DD HH:00:00"))
         select_bind.orgselect("orglist", function () {
             $("#orglist").val(init.get.userinfo().data.userinfo.orgid);
             var orgid = $("#orglist").val();
