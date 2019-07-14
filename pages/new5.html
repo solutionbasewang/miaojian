@@ -151,14 +151,14 @@
 
         }
         .search_area_condition_time_span{
-            width: 25%;
+            width: 35%;
         }
         .search_area_condition_time_span>span{
             margin-left: 0px;
             /*color: #888888;*/
         }
         .search_area_condition_time_select{
-            width: 60%;
+            width: 45%;
         }
         #operate_area{
             margin-top: 10px;
@@ -298,6 +298,10 @@
         {
             background:#ffffff;
         }
+        .operate_area_search{
+            float: left;
+            width: 40%;
+        }
     </style>
     <script>
 
@@ -389,7 +393,7 @@
                             <span id="d4" onclick="news.news_dateselect('d4')" class="new_type_select_no">7天</span>
                             <span id="d5" onclick="news.news_dateselect('d5')" class="new_type_select_no">10天</span>
                         </div>
-
+                        <div class="search_area_condition_time_title">其他时间</div>
                         <div class="search_area_condition_time_select" style="padding-top: 5px">
                             <div class="news_date_1" style="width: 180px;">
                                 <div class="input-group">
@@ -408,7 +412,7 @@
                     </div>
                     <div>
                         <div class="search_area_condition_time_title">新闻</div>
-                        <div class="search_area_condition_time_span" id="news_fj" style="width: 35%">
+                        <div class="search_area_condition_time_span" id="news_fj" >
                             <span id="news_count" class="new_type_select" onclick="news.new_isfenjianselect(this)" value="-1">全部(0)</span>
                             <span id="news_yfj" class="new_type_select_no" onclick="news.new_isfenjianselect(this)" value="1" >已分拣(0)</span>
                             <span id="news_wfj" class="new_type_select_no" onclick="news.new_isfenjianselect(this)" value="0">未分拣(0)</span>
@@ -446,33 +450,16 @@
                             <span id="app" onclick="news.news_typeselect('app')" class="new_type_select_no" ntype="2048">App(0)</span>
                         </div>
                     </div>
-                    <div>
+                    <!-- <div>
                         <div class="search_area_condition_time_title">条件搜索</div>
                         <div class="search_area_condition_time_span" style="width: 70%;">
-                            <div class="news_cs" style="width: 100%;margin-top: 2px;">
-                                <div id="common_search" style="height: 30px;">
-                                    <div id="conditions">
-                                        <!-- <div>标题：宝马</div> -->
-                                    </div>
-                                    <div id="searcher" style="width: 100%;">
-                                        <input type="text" id="searchinput" placeholder="输入查询条件后回车" onkeydown="news.keyup_submit(event)" />
-                                    </div>
-                                </div>
-                                <div id="searchcondition" class="searchcondition">
-                                    <select multiple="multiple" class="form-control" style="font-size:12px;" id="conditionlist">
-                                        <option value="🀄︎">标题-</option>
-                                        <option value="🀀">媒体名称-</option>
-                                        <option value="🀁">特征词-</option>
-                                    </select>
-                                </div>
-                            </div>
-
+                            
                         </div>
                         <div class="search_area_condition_time_span" style="width: 5%;line-height: 35px;">
                             <button type="button" style="margin-left: 10px;" class="btn btn-outline btn-primary btn-xs" onclick="news.loadnews(1)">检索</button>
 
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div id="operate_area">
@@ -496,6 +483,30 @@
                         <!--<p class="fa fa-trash-o"></p>-->
                     <!--</div>-->
                 </div>
+                <div class="operate_area_search">
+                    <div class="news_cs" style="width: 100%;margin-top: 5px;">
+                        <div id="common_search" style="height: 30px;">
+                            <div id="conditions">
+                                <!-- <div>标题：宝马</div> -->
+                            </div>
+                            <div id="searcher" style="width: 100%;">
+                                <input type="text" id="searchinput" placeholder="在结果中检索" onkeydown="news.keyup_submit(event)" />
+                            </div>
+                        </div>
+                        <div id="searchcondition" class="searchcondition">
+                            <select multiple="multiple" class="form-control" style="font-size:12px;" id="conditionlist">
+                                <option value="🀄︎">标题-</option>
+                                <option value="🀀">媒体名称-</option>
+                                <option value="🀁">特征词-</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="float: left">
+                    <button type="button" style="margin-left: 10px;" class="btn btn-outline btn-primary btn-xs" onclick="news.loadnews(1)">检索</button>
+
+                </div>
                 <div class="operate_area_body_moshi" style="float: right">
                     <span id="simple_model" active="1" onclick="news.readingmodeTransformation('simple_model')" class="glyphicon glyphicon-th" style="color:#4c8cc7"></span>
                     <span id="xiangxi_model" active="0" onclick="news.readingmodeTransformation('xiangxi_model')" class="glyphicon glyphicon-th-large" style="margin-left:10px;"
@@ -507,16 +518,16 @@
             <div id="news_body_area" style="height: 550px;">
                 <div style="width: 100%;overflow-y: auto;height: 550px;" id="simple_list">
                     <div id="news_list_title">
-                        <div style="width:3%"><input type="checkbox" id="simple_c" onclick="news.check_all(1,this)"></div>
-                        <div name="cols" vv="col_title" style="width:22%;" key="title">&nbsp;&nbsp;标题<p class="fa fa-sort" style="cursor: pointer;" name="sort" state="0" onclick="news.pxselect(this,'Title')" key="Title" sort="Asc"></p></div>
-                        <div style="width:15%" name="cols" vv="col_medianame">媒体名称<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'MediaName')" state="0" key="MediaName" sort="Asc"></p></div>
-                        <div style="width:15%" name="cols" vv="col_createtime">时间<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'CreateTime')" state="0" key="CreateTime" sort="Asc"></p></div>
-                        <div style="width:10%" name="cols" vv="col_keywords">特征词</div>
-                        <div style="width:8%;display: none;" name="cols" vv="col_author">记者</div>
-                        <div style="width:5%;display: none;" name="cols" vv="col_relativity">调性</div>
+                        <div vflag="v" vvl="0.03" style="width:3%"><input type="checkbox" id="simple_c" onclick="news.check_all(1,this)"></div>
+                        <div vflag="v" name="cols" vvl="0.22" vv="col_title" style="width:22%;" key="title">&nbsp;&nbsp;标题<p class="fa fa-sort" style="cursor: pointer;" name="sort" state="0" onclick="news.pxselect(this,'Title')" key="Title" sort="Asc"></p></div>
+                        <div vflag="v" style="width:15%" vvl="0.15" name="cols" vv="col_medianame">媒体名称<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'MediaName')" state="0" key="MediaName" sort="Asc"></p></div>
+                        <div vflag="v" style="width:15%" vvl="0.15" name="cols" vv="col_createtime">时间<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'CreateTime')" state="0" key="CreateTime" sort="Asc"></p></div>
+                        <div vflag="v" style="width:10%" vvl="0.1" name="cols" vv="col_keywords">特征词</div>
+                        <div vflag="v" style="width:8%;display: none;" vvl="0.08" name="cols" vv="col_author">记者</div>
+                        <div vflag="v" style="width:5%;display: none;" vvl="0.05" name="cols" vv="col_relativity">调性</div>
 
-                        <div style="width:8%" name="colss" vv="col_xsd">相似度<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'similarytity')" state="0" key="similarytity" sort="Asc"></p></div>
-                        <div style="width:19%">标签</div>
+                        <div vflag="v" style="width:8%" name="colss" vvl="0.08" vv="col_xsd">相似度<p class="fa fa-sort" style="cursor: pointer;" name="sort" onclick="news.pxselect(this,'similarytity')" state="0" key="similarytity" sort="Asc"></p></div>
+                        <div vflag="v" style="width:19%" vvl="0.19">标签</div>
                     </div>
                     <div id="table_newslist">
                     </div>
@@ -595,37 +606,37 @@
                             <input type="hidden" id="contextid" value="0">
                             <input type="hidden" id="orderid" value="0">
                             <input type="hidden" id="groupid" value="0"> 
-                            <input  style="width: 176px;height: 22px;" id="meitimingcheng"></td>
+                            <input  style="width: 90%;height: 22px;" id="meitimingcheng"></td>
                     </tr>
                     <tr>
                         <td style="width: 25%; padding: 5px;">来源</td>
                         <td style="width:65%;padding: 5px;">
-                            <input style="width: 176px;height: 22px;"   id="laiyuan"></td>
+                            <input style="width: 90%;height: 22px;"   id="laiyuan"></td>
                     </tr>
                     <tr>
                         <td style="width: 25%; padding: 5px;">标题</td>
                         <td style="width:65%;padding: 5px;">
-                            <input style="width: 176px;height: 22px;"    id="biaoti"></td>
+                            <input style="width: 90%;height: 22px;"    id="biaoti"></td>
                     </tr>
                     <tr>
                         <td style="width: 25%; padding: 5px;">版面/栏目</td>
                         <td style="width:65%;padding: 5px;">
-                            <input style="width: 176px;height: 22px;"   id="lanmu"></td>
+                            <input style="width: 90%;height: 22px;"   id="lanmu"></td>
                     </tr>
                     <tr>
                         <td style="width: 25%; padding: 5px;">字数</td>
                         <td style="width:65%;padding: 5px;">
-                            <input style="width: 176px;height: 22px;"   id="zishu"></td>
+                            <input style="width: 90%;height: 22px;"   id="zishu"></td>
                     </tr>
                     <tr>
                         <td style="width: 25%; padding: 5px;">新闻时间</td>
                         <td style="width:65%;padding: 5px;">
-                            <input style="width: 176px;height: 22px;"   id="xinwenshijian"></td>
+                            <input style="width: 90%;height: 22px;"   id="xinwenshijian"></td>
                     </tr>
                     <tr>
                         <td style="width: 25%; padding: 5px;">记者</td>
                         <td style="width:65%;padding: 5px;">
-                            <input style="width: 176px;height: 22px;"   id="jizhe"></td>
+                            <input style="width: 90%;height: 22px;"   id="jizhe"></td>
                     </tr>
                     <tr>
                         <td style="width: 25%; padding: 5px;">摘要批处理</td>

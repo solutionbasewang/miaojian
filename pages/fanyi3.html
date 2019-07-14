@@ -502,41 +502,46 @@
                             <span id="xwdx_rb" onclick="fanyi.news_xwdxselect('xwdx_rb')" value="0" class="new_type_select_no">日报</span>
                         </div>
                     </div>
-                    <div>
-                        <!--<div class="search_area_condition_time_title">条件搜索</div>-->
+                    <!-- <div>
                         <div class="search_area_condition_time_span" style="width: 90%;">
-                            <div class="news_cs" style="width: 100%;margin-top: 2px;padding-left:0px;">
-                                <div id="common_search" style="height: 30px;">
-                                    <div id="conditions">
-                                        <!-- <div>标题：宝马</div> -->
-                                    </div>
-                                    <div id="searcher" style="width: 100%;">
-                                        <input type="text" id="searchinput" placeholder="输入查询条件后回车" />
-                                    </div>
-                                </div>
-                                <div id="searchcondition" class="searchcondition">
-                                    <select multiple="multiple" class="form-control" style="font-size:12px;" id="conditionlist">
-                                        <option value="🀄︎">标题-</option>
-                                        <option value="🀀">媒体名称-</option>
-                                        <option value="🀁">特征词-</option>
-                                    </select>
-                                </div>
-                            </div>
+                            
 
                         </div>
                         <div class="search_area_condition_time_span" style="width: 5%;line-height: 35px;">
-                            <button type="button" style="margin-left: 10px;" class="btn btn-outline btn-primary btn-xs" onclick="fanyi.load_order(1)">检索</button>
 
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
             <div id="operate_area">
-                <div class="operate_area_title">操作
+                <div class="operate_area_title" style="width: 30%">操作
                     <span class="fa fa-object-group" aria-hidden="true" style="margin-left: 10px;cursor: pointer;" onclick="fanyi.hebing()"></span>
                     <!--<span class="fa fa-object-ungroup" aria-hidden="true" style="margin-left: 10px;"></span>-->
                     <span class="fa fa-trash-o" aria-hidden="true" style="margin-left: 10px;cursor: pointer; font-size: 15px;" onclick="fanyi.orderdele()"></span>
+                </div>
+                <div style="float: left;width:60%">
+                    <div class="news_cs" style="width: 100%;margin-top: 5px;padding-left:0px;">
+                        <div id="common_search" style="height: 30px;">
+                            <div id="conditions">
+                                <!-- <div>标题：宝马</div> -->
+                            </div>
+                            <div id="searcher" style="width: 100%;">
+                                <input type="text" id="searchinput" placeholder="输入查询条件后回车" />
+                            </div>
+                        </div>
+                        <div id="searchcondition" class="searchcondition">
+                            <select multiple="multiple" class="form-control" style="font-size:12px;" id="conditionlist">
+                                <option value="🀄︎">标题-</option>
+                                <option value="🀀">媒体名称-</option>
+                                <option value="🀁">特征词-</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div style="float: left">
+                    <button type="button" style="margin-left: 10px;" class="btn btn-outline btn-primary btn-xs" onclick="fanyi.load_order(1)">检索</button>
+
                 </div>
                 <div class="operate_area_body_moshi" style="float: right">
 

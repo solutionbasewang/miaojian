@@ -7,6 +7,10 @@ function commsearch(targetid, data, selectid, searchinputid, condition_container
         var conditioncounts = $("#conditions div");
         $("#conditions").css("width", (conditioncounts.length * 20) + "%");
         $("#searcher").css("width", (100 - conditioncounts.length * 20) + "%");
+        var width = parseInt(100/conditioncounts.length);
+            $.each(conditioncounts,function(i,o){
+                $(o).css("width",(width+"%"));
+            })
     }
     this.init = function (t) {
         var offset = $("#" + targetid)[0];
@@ -24,6 +28,7 @@ function commsearch(targetid, data, selectid, searchinputid, condition_container
                 $("#" + searchcondition).hide();
                 return;
             }
+            
             if (vlist[0] == "🀄︎") {
                 var len=4;
                 //title
@@ -42,6 +47,10 @@ function commsearch(targetid, data, selectid, searchinputid, condition_container
             $("#" + searchinputid).val("");
             $("#" + selectid).val("");
             $("#" + searchcondition).hide();
+            var width = parseInt(100/conditioncounts.length);
+            $.each(conditioncounts,function(i,o){
+                $(o).css("width",(width+"%"));
+            })
         })
         $("#" + searchinputid).on("click", function (e) {
             $("#" + searchcondition).show();
@@ -70,7 +79,7 @@ function commsearch(targetid, data, selectid, searchinputid, condition_container
                     $(obj).html("媒体名称-" + tvalue);
                     $(obj).val("🀀:" + tvalue);
                 } else if (value.indexOf("🀁") != -1) {
-                    $(obj).html("特征词-" + tvalue);
+                    $(obj).html("全文-" + tvalue);
                     $(obj).val("🀁:" + tvalue);
                 }
             });

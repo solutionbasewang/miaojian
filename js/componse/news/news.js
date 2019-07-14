@@ -856,6 +856,29 @@ var news = {
             $.bootstrapLoading.end();
         })
     },
+    getColsLength:function(){
+        var length=0;
+        var divs = $("div[vflag='v']");
+        $.each(divs,function(i,o){
+            if($(o).css("display")!=="none"){
+                console.log(parseFloat($(o).attr("vvl")));
+                length+=(parseFloat($(o).attr("vvl")));
+            }
+        })
+        var s = ((1-length)*100+22)+"%";
+        var centerwidth = $("#center").attr("widths");
+        var len = tool.percent_conversion_size(14,parseFloat(centerwidth),((1-length)*100+22)/100);
+        $("div[vv='col_title']").each(function(i,o){
+            $(o).css("width",s)
+            var title = $(o).attr("title");
+            var span = $(o).find("span");
+            if(span.length>0){
+                $(span[0]).html(tool.stringtool.substr(title, len))
+            }
+        })
+        // return length;
+
+    },
     loadnews_simple:function(data){
         // console.log();
         var centerwidth = $("#center").attr("widths");
@@ -977,7 +1000,8 @@ var news = {
             e.stopPropagation();
         });
         news.new_showcol();
-
+        //console.log();
+        // news.getColsLength()
         news.hightlight1("table_newslist");
     },
     loadnews_xiangxi:function(data){
@@ -2249,7 +2273,7 @@ var news = {
         $.each(keys,function (i,o) {
             var oDiv = document.getElementById(id),
                 sText = oDiv.innerHTML,
-                bgColor = bgColor || "orange",
+                bgColor = bgColor || "#CC0066",
                 sKey = "<span style='background-color: "+bgColor+";'>"+o+"</span>",
                 num = -1,
                 rStr = new RegExp(o, "g"),
@@ -2350,6 +2374,7 @@ var news = {
             }
 
         })
+        news.getColsLength();
     },
     yulanshowandhide:function (obj) {
         var t = $(obj);
