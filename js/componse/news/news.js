@@ -446,7 +446,8 @@ var news = {
         }
         else if(orderstate==3){
             var param = new Array();
-            param.push(orderid);
+
+            param.push($(obj).attr("orderid"));
             url+="/order/delete";
             tool.ajaxTool.ajax(url, tool.ajaxTool.ajaxtype.post, param, true, function (data) {
                 $.bootstrapLoading.end();
