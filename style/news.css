@@ -233,7 +233,7 @@
 #common_search{
     width: 100%;
     /* border-radius: 10px; */
-    border:1px solid #dfdfdf;
+    border: 1px solid #8da9c2;
     background-color: #ffffff;
 
 }
@@ -256,7 +256,7 @@
 #searcher{
     width: 80%;
     float: right;
-
+    
 }
 #searcher input{
     margin-top: 5px;
@@ -420,7 +420,7 @@ xiangxi_news_twotitle{
 }
 .new_type_select{
     font-weight: bold;
-    color: #023359;
+    color: #023395 !important;
 }
 .new_type_select_no{
     /*font-weight: bolder;*/

@@ -147,7 +147,8 @@
         }
         .search_area_condition_time_title{
             width: 10%;
-            font-weight: bolder;
+            color: #434D61;
+            /* font-weight: bolder; */
 
         }
         .search_area_condition_time_span{
@@ -385,7 +386,7 @@
                 </div>
                 <div id="search_area_condition">
                     <div>
-                        <div class="search_area_condition_time_title">时间范围</div>
+                        <div class="search_area_condition_time_title">时间范围:</div>
                         <div class="search_area_condition_time_span" id="new_date">
                             <span id="d1" onclick="news.news_dateselect('d1')" class="new_type_select">今天</span>
                             <span id="d2" onclick="news.news_dateselect('d2')" class="new_type_select_no">23小时</span>
@@ -393,7 +394,7 @@
                             <span id="d4" onclick="news.news_dateselect('d4')" class="new_type_select_no">7天</span>
                             <span id="d5" onclick="news.news_dateselect('d5')" class="new_type_select_no">10天</span>
                         </div>
-                        <div class="search_area_condition_time_title">其他时间</div>
+                        <div class="search_area_condition_time_title">其他时间:</div>
                         <div class="search_area_condition_time_select" style="padding-top: 5px">
                             <div class="news_date_1" style="width: 180px;">
                                 <div class="input-group">
@@ -411,13 +412,13 @@
                         </div>
                     </div>
                     <div>
-                        <div class="search_area_condition_time_title">新闻</div>
+                        <div class="search_area_condition_time_title">新闻:</div>
                         <div class="search_area_condition_time_span" id="news_fj" >
                             <span id="news_count" class="new_type_select" onclick="news.new_isfenjianselect(this)" value="-1">全部(0)</span>
                             <span id="news_yfj" class="new_type_select_no" onclick="news.new_isfenjianselect(this)" value="1" >已分拣(0)</span>
                             <span id="news_wfj" class="new_type_select_no" onclick="news.new_isfenjianselect(this)" value="0">未分拣(0)</span>
                         </div>
-                        <div class="search_area_condition_time_title">相似新闻</div>
+                        <div class="search_area_condition_time_title">相似新闻:</div>
                         <div class="search_area_condition_time_span" id="news_xsd">
                             <span id="xsd_bhb" class="new_type_select_no" onclick="news.news_xsdselect('xsd_bhb')" value="0">不合并</span>
                             <span id="xsd_xshd" class="new_type_select" onclick="news.news_xsdselect('xsd_xshd')" value="1">相似合并</span>
@@ -425,7 +426,7 @@
                         </div>
                     </div>
                     <div>
-                        <div class="search_area_condition_time_title">新闻调性</div>
+                        <div class="search_area_condition_time_title">新闻调性:</div>
                         <div class="search_area_condition_time_span" id="news_xwdx">
                             <span id="xwdx_qb" class="new_type_select" onclick="news.news_xwdxselect('xwdx_qb')" value="-2">全部</span>
                             <span id="xwdx_mg" class="new_type_select_no" onclick="news.news_xwdxselect('xwdx_mg')" value="-1">敏感</span>
@@ -433,7 +434,7 @@
                         </div>
                     </div>
                     <div>
-                        <div class="search_area_condition_time_title">媒体类型</div>
+                        <div class="search_area_condition_time_title">媒体类型:</div>
                         <div class="search_area_condition_time_span" style="width: 90%;" id="new_type">
                             <span id="quanbu" onclick="news.news_typeselect('quanbu')" class="new_type_select" ntype="0">全部(0)</span>
                             <span id="pingming" onclick="news.news_typeselect('pingming')" class="new_type_select_no" ntype="1">平面(0)</span>
@@ -497,7 +498,7 @@
                             <select multiple="multiple" class="form-control" style="font-size:12px;" id="conditionlist">
                                 <option value="🀄︎">标题-</option>
                                 <option value="🀀">媒体名称-</option>
-                                <option value="🀁">特征词-</option>
+                                <option value="🀁">正文-</option>
                             </select>
                         </div>
                     </div>
